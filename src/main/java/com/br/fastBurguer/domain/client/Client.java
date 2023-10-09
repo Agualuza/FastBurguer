@@ -5,7 +5,6 @@ import com.br.fastBurguer.domain.cpf.CPF;
 import com.br.fastBurguer.domain.email.Email;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +27,7 @@ public class Client {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
-        this.identified = identified;
+        this.identified = identified.getValue();
     }
     
     @Id
@@ -47,12 +46,7 @@ public class Client {
     private Email email;
 
     @NotNull
-    @Enumerated
-    private ClientIdentifyByEnum identified;
+    private String identified;
  
-    @NotNull
     private Long acessNum;
-
-    
-
 }
