@@ -1,0 +1,25 @@
+version: "3.0"
+services:
+  fastburguer:
+    image: fastburguer:latest
+    depends_on:
+      - db
+    container_name: fastburguer-api
+    networks:
+      - fastburguer-bridge
+    ports:
+      - 9080:9080
+    restart: always
+
+  db:
+    image: mysql
+    container_name: fastburguer-db
+    networks:
+      - fastburguer-bridge
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: always
+
+networks:
+  fastburguer-bridge:
+    driver: bridge
