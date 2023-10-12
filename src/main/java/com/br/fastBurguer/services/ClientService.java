@@ -10,6 +10,7 @@ import com.br.fastBurguer.domain.email.Email;
 import com.br.fastBurguer.repository.ClientRepository;
 import com.br.fastBurguer.repository.CpfRepository;
 import com.br.fastBurguer.repository.EmailRepository;
+import com.br.fastBurguer.utils.ConvertCpfParam;
 
 @Service
 public class ClientService {
@@ -17,12 +18,15 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
-    @Autowired 
+    @Autowired
     CpfRepository cpfRepository;
 
     @Autowired
     EmailRepository emailRepository;
-    
+
+    @Autowired
+    ConvertCpfParam convertCpfParam;
+
     public void clientRegister(ClientDto client) {
 
         CPF Cpf = new CPF(client.cpf().number());
@@ -31,8 +35,14 @@ public class ClientService {
         Email email = new Email(client.email().address());
         emailRepository.save(email);
 
-        Client clientToPersist = new Client(client.name(), Cpf, email, client.identified());        
-        
+        Client clientToPersist = new Client(client.name(), Cpf, email, client.identified());
+
         clientRepository.save(clientToPersist);
+    }
+
+    public Client getClientByCpf(String cpf) {
+        String formatedCpf = convertCpfParam.convertCpfParams(cpf);
+        Client clientToReturn = clientRepository.findClientCpf(formatedCpf);
+        return clientToReturn;
     }
 }

@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "clients")
 @EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 public class Client {
 
     public Client(@NotNull String name, CPF cpf, Email email, @NotNull ClientIdentifyByEnum identified) {
@@ -29,7 +31,7 @@ public class Client {
         this.email = email;
         this.identified = identified.getValue();
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,13 +42,14 @@ public class Client {
     @OneToOne
     @JoinColumn(name = "cpfs_id")
     private CPF cpf;
- 
+
     @OneToOne
     @JoinColumn(name = "emails_id")
     private Email email;
 
     @NotNull
     private String identified;
- 
+
     private Long acessNum;
+
 }
