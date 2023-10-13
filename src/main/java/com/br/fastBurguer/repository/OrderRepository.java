@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.br.fastBurguer.domain.order.Order;
 
 @Repository
-public interface OrderRepoistory extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
     
 }

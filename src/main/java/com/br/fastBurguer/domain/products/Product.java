@@ -12,12 +12,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "products")
 @Getter
-@Setter
 @NoArgsConstructor
 public class Product {
 

@@ -15,11 +15,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "clients")
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
