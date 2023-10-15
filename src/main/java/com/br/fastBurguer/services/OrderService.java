@@ -22,15 +22,18 @@ public class OrderService {
     @Autowired
     ClientRepository clientRepository;
 
-    public void createOrder(OrderDto order) {
+    public Order createOrder(OrderDto order) {
 
         Optional<Client> client = clientRepository.findById(order.clientId());
 
-        if (client != null) {
-            List<Long> products = order.products();
-            Order orderCreated = new Order(client.get(), products);
-            orderRepoistory.save(orderCreated);
+        if(client == null) {
+            throw new Error("Usário não existe");
         }
+
+        List<Long> products = order.products();
+        Order orderCreated = new Order(client.get(), products);
+        orderRepoistory.save(orderCreated);
+        return orderCreated;
 
     }
 
@@ -41,7 +44,7 @@ public class OrderService {
 
         for (Order order : arrayOrders) {
             Order orderToAdd = new Order(order.getId(), order.getClient(), order.getProdutcsIds());
-            itemsToReturn.add(orderToAdd);                    
+            itemsToReturn.add(orderToAdd);
         }
 
         return itemsToReturn;

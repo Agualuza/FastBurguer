@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,15 +14,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CPF {
     
-    public CPF(String cpf) {
-        this.cpf = cpf;
+    public CPF(String number) {
+        this.number = number;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String cpf;
+    private String number;
 
 }

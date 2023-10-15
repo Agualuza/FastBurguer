@@ -13,6 +13,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     @Query("SELECT c\r\n" + //
             "FROM Client c\r\n" + //
             "JOIN c.cpf cpf\r\n" + //
-            "WHERE cpf.cpf = :cpf")
+            "WHERE cpf.number = :cpf")
     public Client findClientCpf(@Param("cpf") String cpf);
 }
