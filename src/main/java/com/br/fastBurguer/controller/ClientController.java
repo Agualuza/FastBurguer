@@ -53,7 +53,7 @@ public class ClientController {
     @PostMapping()
     public ResponseEntity<String> clientRegister(@RequestBody ClientDto client) {
         if (!clientService.getCpfByNumber(client.cpf().number())) {
-            System.out.println("Cliente existe");
+            System.out.println("Cliente já existe");
             return ResponseEntity.badRequest().body("CPF já existe");
         }
         clientService.clientRegister(client);
