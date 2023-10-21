@@ -67,4 +67,10 @@ public class ClientService {
         Client clientToReturn = clientRepository.findClientCpf(formatedCpf);
         return clientToReturn;
     }
+
+    public boolean getCpfByNumber(String number) {
+        CPF checkCpf = cpfRepository.findByNumber(number);
+
+        return checkCpf == null;
+    }
 }

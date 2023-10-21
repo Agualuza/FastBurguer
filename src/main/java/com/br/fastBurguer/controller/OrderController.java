@@ -34,9 +34,10 @@ public class OrderController {
     ProductService productService;
 
     @PostMapping() 
-    public void createOrder(@RequestBody OrderDto order) {
+    public ResponseEntity<Void> createOrder(@RequestBody OrderDto order) {
         Order orderEntity = orderService.createOrder(order);
         queueService.createQueue(orderEntity);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping()

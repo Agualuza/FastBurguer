@@ -1,25 +1,26 @@
-version: "3.0"
+version: "3.8"
+
 services:
-  fastburguer:
-    image: fastburguer:latest
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
       - db
     container_name: fastburguer-api
-    networks:
-      - fastburguer-bridge
     ports:
       - 9080:9080
     restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fastBurguer?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root     
+    links:
+      - db
 
   db:
-    image: mysql
+    image: mysql:latest
     container_name: fastburguer-db
-    networks:
-      - fastburguer-bridge
     environment:
       - MYSQL_ROOT_PASSWORD=root
     restart: always
-
-networks:
-  fastburguer-bridge:
-    driver: bridge

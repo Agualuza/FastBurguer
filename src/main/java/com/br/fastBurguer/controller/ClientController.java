@@ -13,7 +13,14 @@ import com.br.fastBurguer.domain.client.Client;
 import com.br.fastBurguer.domain.client.dto.ClientDto;
 import com.br.fastBurguer.domain.client.dto.ClientResponseControllerDto;
 import com.br.fastBurguer.services.ClientService;
+import com.br.fastBurguer.utils.ConvertCpfParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/client")
@@ -22,12 +29,54 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
+    @Autowired
+    ConvertCpfParam convertCpfParam;
+
+    @Operation(summary = "Create Client")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "201",
+            description = "Client Created",
+            content = {
+                @Content(mediaType = "application/json",
+                schema = @Schema(implementation = ClientDto.class))
+            }
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad Request",
+            content = {
+                @Content
+            }
+        )
+    })
     @PostMapping()
-    public ResponseEntity<ClientDto> clientRegister(@RequestBody ClientDto client) {
+    public ResponseEntity<String> clientRegister(@RequestBody ClientDto client) {
+        if (!clientService.getCpfByNumber(client.cpf().number())) {
+            System.out.println("Cliente existe");
+            return ResponseEntity.badRequest().body("CPF já existe");
+        }
         clientService.clientRegister(client);
-        return ResponseEntity.ok(client);
+        return ResponseEntity.status(201).build();
     }
 
+    @Operation(summary = "Search Client By CPF")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "201",
+            description = "Client Found",
+            content = {
+                @Content
+            }
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad Request",
+            content = {
+                @Content
+            }
+        )
+    })
     @GetMapping()
     public ResponseEntity<ClientResponseControllerDto> getClientByCpf(@RequestParam("cpf") String cpfValue)
             throws JsonProcessingException {

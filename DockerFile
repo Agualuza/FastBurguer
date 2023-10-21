@@ -2,9 +2,9 @@ FROM openjdk:17
 
 LABEL key="postech/fastBurguer-1.0.0.jar"
 
-COPY ./target/fastBurguer-1.0.0.jar /app/fastBurguer-1.0.0.jar
-
 WORKDIR /app
+
+COPY target/fastBurguer-1.0.0.jar .
 
 RUN chmod +x /app/fastBurguer-1.0.0.jar
 

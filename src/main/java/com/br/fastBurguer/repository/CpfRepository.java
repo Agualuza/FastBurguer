@@ -7,5 +7,5 @@ import com.br.fastBurguer.domain.cpf.CPF;
 
 @Repository
 public interface CpfRepository extends JpaRepository<CPF, Long> {
-    
+    public CPF findByNumber(String number);
 }
