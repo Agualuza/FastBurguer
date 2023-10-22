@@ -7,14 +7,14 @@ Go to workspace root and run commands:
 
 **1.** Build Application
  ```bash
-mvn clean package
+ Create Enviroment variable MYSQL_SECRET with your local mysql password
  ```
-**2.** Build Docker Image
+**2.** build java app
  ```bash
- docker build -f DockerFile -t fastburguer:latest .
+ mvn clean package
  ```
 
-**3.** Up Container
+**3.** Build and Up Container
  ```bash
- docker compose up -d
+ docker compose up --build -d
  ```

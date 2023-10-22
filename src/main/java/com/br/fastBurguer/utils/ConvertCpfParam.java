@@ -9,7 +9,7 @@ public class ConvertCpfParam {
         cpf = cpf.replaceAll("[^0-9]", "");
 
         if (cpf.length() != 11) {
-            throw new Error("CPF inválido.");
+            throw new NullPointerException("CPF inválido.");
         }
 
         return cpf.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");

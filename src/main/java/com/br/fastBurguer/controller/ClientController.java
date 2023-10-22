@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.fastBurguer.domain.client.Client;
 import com.br.fastBurguer.domain.client.dto.ClientDto;
 import com.br.fastBurguer.domain.client.dto.ClientResponseControllerDto;
+import com.br.fastBurguer.domain.cpf.dto.CpfDto;
 import com.br.fastBurguer.services.ClientService;
 import com.br.fastBurguer.utils.ConvertCpfParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -75,18 +76,29 @@ public class ClientController {
             content = {
                 @Content
             }
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Not Found",
+            content = {
+                @Content
+            }
         )
     })
     @GetMapping()
-    public ResponseEntity<ClientResponseControllerDto> getClientByCpf(@RequestParam("cpf") String cpfValue)
-            throws JsonProcessingException {
+    public ResponseEntity<ClientResponseControllerDto> getClientByCpf(@RequestParam("cpf") CpfDto cpfValue)
+            throws JsonProcessingException {               
 
-        Client clientToReturn = clientService.getClientByCpf(cpfValue);
+        try {
+            Client clientToReturn = clientService.getClientByCpf(cpfValue.number());
 
-        if (clientToReturn != null) {
-            ClientResponseControllerDto clientDto = new ClientResponseControllerDto(clientToReturn.getId(),
+            if (clientToReturn != null) {
+            ClientResponseControllerDto clientDto = new ClientResponseControllerDto(clientToReturn.getId(), clientToReturn.getName(),
                     clientToReturn.getCpf().getNumber(), clientToReturn.getEmail().getAddress(), clientToReturn.getIdentified());
             return ResponseEntity.ok(clientDto);
+        }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.notFound().build();
