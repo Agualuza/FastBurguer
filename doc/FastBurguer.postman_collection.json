@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "fe95596b-d80f-4004-ae73-7cd07d8fcc70",
+		"name": "FastBurguer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30607767"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Create Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"\",\r\n\t\"cpf\": {\r\n\t\t\"number\": \"123.123.123-54\"\r\n\t},\r\n\t\"email\": {\r\n\t\t\"address\": \"\"\r\n\t},\r\n\t\"identified\": \"CPF\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/client"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client By CPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fastburguer}}/client?cpf=123236",
+							"host": [
+								"{{fastburguer}}"
+							],
+							"path": [
+								"client"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "123236"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Misto\",\r\n\t\"description\": \"com queijo\",\r\n\t\"price\": 4.99,\r\n\t\"type\": \"SANDWICH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\": 2,\r\n\t\"name\": \"coca\",\r\n\t\"description\": \"bebida gaseificada do registro 2\",\r\n\t\"price\": 11.88,\r\n\t\"type\": \"bebida\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fastburguer}}/products/byCategory?category=lanche",
+							"host": [
+								"{{fastburguer}}"
+							],
+							"path": [
+								"products",
+								"byCategory"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "lanche"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{fastburguer}}/products?id=4",
+							"host": [
+								"{{fastburguer}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fastburguer}}/products"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"clientId\": 4,\r\n\t\"products\": [1,2,4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/order"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fastburguer}}/order"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Queue",
+			"item": [
+				{
+					"name": "Get Queue By Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fastburguer}}/queue?status=RECEIVE",
+							"host": [
+								"{{fastburguer}}"
+							],
+							"path": [
+								"queue"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "RECEIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Queue Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/queue/RECEIVE"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "fastburguer",
+			"value": "localhost:9080"
+		}
+	]
+}
