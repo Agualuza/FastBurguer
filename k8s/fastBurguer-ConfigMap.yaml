@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fastburguer-configmap
+data:
+  spring_data_source_db_url: "jdbc:mysql://127.0.0.1:3306/fastBurguer?createDatabaseIfNotExist=true"
+  spring_data_source_db_user: "root"
+  spring_data_source_db_pass: "root"

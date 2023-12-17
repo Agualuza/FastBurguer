@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastburguer-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastburguer-app
+  template:
+    metadata:
+      labels:
+        app: fastburguer-app
+    spec:
+      containers:
+      - name: fastburguer-bd
+        image: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "300m"
+        ports:
+        - containerPort: 3306
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - mysql -h 127.0.0.1 -uroot -proot -e "SELECT 1"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      - name: fastburguer-app
+        image: gui182/fastburguer
+        env:
+          - name: SPRING_DATASOURCE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: fastburguer-configmap
+                key: spring_data_source_db_url
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: fastburguer-configmap
+                key: spring_data_source_db_user
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: fastburguer-configmap
+                key: spring_data_source_db_pass
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "300m"
+        ports:
+        - containerPort: 9080
