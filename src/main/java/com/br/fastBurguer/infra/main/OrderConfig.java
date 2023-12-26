@@ -10,7 +10,6 @@ import com.br.fastBurguer.application.useCases.CreateOrder;
 import com.br.fastBurguer.application.useCases.FindAllOrders;
 import com.br.fastBurguer.application.useCases.FindClientById;
 import com.br.fastBurguer.infra.controllers.order.OrderDTOMapper;
-import com.br.fastBurguer.infra.gateways.client.ClientEntityMapper;
 import com.br.fastBurguer.infra.gateways.order.CreateOrderRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindAllOrdersRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.OrderEntityMapper;
@@ -31,8 +30,8 @@ public class OrderConfig {
 
     @Bean
     CreateOrderGateway createOrderGateway(OrderEntityMapper orderEntityMapper,
-            OrderRepository orderRepository, ClientEntityMapper clientEntityMapper) {
-        return new CreateOrderRepositoryGateway(orderEntityMapper, orderRepository, clientEntityMapper);
+            OrderRepository orderRepository) {
+        return new CreateOrderRepositoryGateway(orderEntityMapper, orderRepository);
     }
 
     @Bean
@@ -41,8 +40,8 @@ public class OrderConfig {
     }
 
     @Bean
-    OrderEntityMapper orderEntityMapper(ClientEntityMapper clientEntityMapper) {
-        return new OrderEntityMapper(clientEntityMapper);
+    OrderEntityMapper orderEntityMapper() {
+        return new OrderEntityMapper();
     }
 
     @Bean

@@ -19,7 +19,7 @@ public class CreateClient {
 
     public Client createClient(Client client) {
 
-        Cpf cpf = createCpf.createCpf(client, client.getCpf());
+        Cpf cpf = createCpf.createCpf(client);
 
         Email email = createEmail.createClientEmail(client, client.getEmail());
 

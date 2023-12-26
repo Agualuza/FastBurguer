@@ -16,7 +16,7 @@ public class ClientEntityMapper {
     }
 
     public Client toDomain(ClientEntity clientEntity) {
-        return new Client(clientEntity.getName(), toCpfDomain(clientEntity.getCpfEntity()),
+        return new Client(clientEntity.getId(), clientEntity.getName(), toCpfDomain(clientEntity.getCpfEntity()),
                 toEmailDomain(clientEntity.getEmailEntity()), clientEntity.getIdentified());
     }
 

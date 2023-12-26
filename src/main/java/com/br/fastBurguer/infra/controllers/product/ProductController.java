@@ -59,9 +59,11 @@ public class ProductController {
             })
     })
     @GetMapping()
-    public ResponseEntity<List<Product>> getAllProdutcs() {
+    public ResponseEntity<List<CreateProductResponse>> getAllProdutcs() {
         List<Product> products = findAllProducts.findAllProducts();
-        return ResponseEntity.ok().body(products);
+        List<CreateProductResponse> productsToReturn = productDTOMapper.toResponse(products);
+        
+        return ResponseEntity.ok().body(productsToReturn);
     }
 
     @Operation(summary = "Create Product")
@@ -127,9 +129,10 @@ public class ProductController {
             })
     })
     @GetMapping("/byCategory")
-    public ResponseEntity<List<Product>> getProductByCategory(@RequestParam("category") String category) {
+    public ResponseEntity<List<CreateProductResponse>> getProductByCategory(@RequestParam("category") String category) {
         List<Product> products = findProductByCategory.findProductByCategory(category);
-        return ResponseEntity.ok().body(products);
+        List<CreateProductResponse> productsToReturn = productDTOMapper.toResponse(products);
+        return ResponseEntity.ok().body(productsToReturn);
     }
 
 }

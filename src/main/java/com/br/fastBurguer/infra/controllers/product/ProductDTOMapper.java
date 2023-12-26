@@ -1,5 +1,8 @@
 package com.br.fastBurguer.infra.controllers.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.br.fastBurguer.core.entities.Product;
 
 public class ProductDTOMapper {
@@ -12,6 +15,18 @@ public class ProductDTOMapper {
     public CreateProductResponse toResponse(Product product) {
         return new CreateProductResponse(product.getId(), product.getName(), product.getDescription(),
                 product.getPrice(), product.getType());
+    }
+
+    public List<CreateProductResponse> toResponse(List<Product> products) {
+        List<CreateProductResponse> productsReturn = new ArrayList<>();
+
+        for (Product productToadd : products) {
+            CreateProductResponse productToAdd = new CreateProductResponse(productToadd.getId(), productToadd.getName(), productToadd.getDescription(),
+                productToadd.getPrice(), productToadd.getType());
+            productsReturn.add(productToAdd);
+        }
+
+        return productsReturn;
     }
 
     public Product toDomainEdit(EditProductRequest editProductRequest) {

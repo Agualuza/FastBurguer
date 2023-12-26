@@ -3,21 +3,21 @@ package com.br.fastBurguer.infra.main;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.br.fastBurguer.application.gateways.CreateCpfGateway;
+import com.br.fastBurguer.adapters.ValidateCpfGateway;
 import com.br.fastBurguer.application.gateways.FindCpfGateway;
 import com.br.fastBurguer.application.useCases.CreateCpf;
 import com.br.fastBurguer.application.useCases.FindCpf;
 import com.br.fastBurguer.infra.gateways.cpf.CpfEntityMapper;
-import com.br.fastBurguer.infra.gateways.cpf.CreateCpfRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.cpf.SearchCpfRepositoryGateway;
 import com.br.fastBurguer.infra.persistence.cpf.CpfRepository;
+import com.br.fastBurguer.services.ValidateCpf;
 
 @Configuration
 public class CpfConfig {
 
     @Bean
-    CreateCpf createCpf(CreateCpfGateway createCpfGateway, FindCpf findCpf) {
-        return new CreateCpf(createCpfGateway, findCpf);
+    CreateCpf createCpf(FindCpf findCpf, ValidateCpfGateway validateCpfGateway) {
+        return new CreateCpf(findCpf, validateCpfGateway);
     }
 
     @Bean
@@ -26,8 +26,8 @@ public class CpfConfig {
     }
 
     @Bean
-    CreateCpfGateway createCpfGateway(CpfEntityMapper cpfEntityMapper, CpfRepository cpfRepository) {
-        return new CreateCpfRepositoryGateway(cpfEntityMapper, cpfRepository);
+    ValidateCpfGateway ValidateCpfGateway() {
+        return new ValidateCpf();
     }
 
     @Bean

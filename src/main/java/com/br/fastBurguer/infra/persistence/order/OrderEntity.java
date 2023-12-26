@@ -4,14 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.fastBurguer.core.entities.Client;
-import com.br.fastBurguer.infra.persistence.client.ClientEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,8 +22,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderEntity {
 
-    public OrderEntity(@NotNull ClientEntity clientEntity, @NotNull List<String> products) {
-        this.clientEntity = clientEntity;
+    public OrderEntity(@NotNull Long clientId, @NotNull List<String> products) {
+        this.clientId = clientId;
         this.products = products;
     }
 
@@ -37,9 +34,8 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "clients_id")
-    private ClientEntity clientEntity;
+    @NotNull
+    private Long clientId;
 
     @NotNull
     List<String> products;

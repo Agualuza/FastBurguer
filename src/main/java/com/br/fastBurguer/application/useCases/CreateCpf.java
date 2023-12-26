@@ -1,26 +1,27 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.CreateCpfGateway;
+import com.br.fastBurguer.adapters.ValidateCpfGateway;
 import com.br.fastBurguer.core.Enums.ClientIdentifyByEnum;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.core.entities.Cpf;
-import com.br.fastBurguer.utils.ValidateCpf;
 
 public class CreateCpf {
 
-    private final CreateCpfGateway createCpfGateway;
     private final FindCpf findCpf;
+    private final ValidateCpfGateway validateCpfGateway;
 
-    public CreateCpf(CreateCpfGateway createCpfGateway, FindCpf findCpf) {
-        this.createCpfGateway = createCpfGateway;
+    public CreateCpf(FindCpf findCpf, ValidateCpfGateway validateCpfGateway) {
         this.findCpf = findCpf;
+        this.validateCpfGateway = validateCpfGateway;
     }
 
-    public Cpf createCpf(Client client, Cpf cpf) {
+    public Cpf createCpf(Client client) {
 
         Cpf cpfToCreate;
 
-        Cpf cpfAlreadyExists = findCpf.findClientByCpf(ValidateCpf.validateCpfParams(client.getCpf().getNumber()));
+        String cpfNumberValidated = validateCpfGateway.validateCpfParams(client.getCpf().getNumber());
+
+        Cpf cpfAlreadyExists = findCpf.findClientByCpf(cpfNumberValidated);
 
         if (cpfAlreadyExists.getNumber() != null) {
             throw new RuntimeException("Cpf já cadastrado");
@@ -30,10 +31,10 @@ public class CreateCpf {
                 || (client.getIdentified().equals(ClientIdentifyByEnum.NAME.getValue()))) {
             cpfToCreate = new Cpf(null);
         } else {
-            cpfToCreate = new Cpf(client.getCpf().getNumber());
+            cpfToCreate = new Cpf(cpfNumberValidated);
         }
 
-        return createCpfGateway.createCpf(cpfToCreate);
+        return cpfToCreate;
     }
 
 }

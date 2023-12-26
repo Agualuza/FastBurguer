@@ -53,7 +53,7 @@ public class ClientController {
         try {
             createClient.createClient(clientToCreate);
         } catch (Exception e) {
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(500).body(e.getMessage());
         }
         return ResponseEntity.status(201).build();
     }

@@ -6,6 +6,7 @@ public class Product {
 
     public Product(Long id, String name, String description, BigDecimal price,
             String type) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
