@@ -19,18 +19,15 @@ public class CreateCpf {
 
         Cpf cpfToCreate;
 
-        String cpfNumberValidated = validateCpfGateway.validateCpfParams(client.getCpf().getNumber());
-
-        Cpf cpfAlreadyExists = findCpf.findClientByCpf(cpfNumberValidated);
-
-        if (cpfAlreadyExists.getNumber() != null) {
-            throw new RuntimeException("Cpf já cadastrado");
-        }
-
         if (client.getIdentified().equals(ClientIdentifyByEnum.NOTIDENTIFY.getValue())
                 || (client.getIdentified().equals(ClientIdentifyByEnum.NAME.getValue()))) {
             cpfToCreate = new Cpf(null);
         } else {
+            String cpfNumberValidated = validateCpfGateway.validateCpfParams(client.getCpf().getNumber());
+            Cpf cpfAlreadyExists = findCpf.findClientByCpf(cpfNumberValidated);
+            if (cpfAlreadyExists.getNumber() != null) {
+                throw new RuntimeException("Cpf já cadastrado");
+            }
             cpfToCreate = new Cpf(cpfNumberValidated);
         }
 

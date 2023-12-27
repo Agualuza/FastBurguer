@@ -23,7 +23,8 @@ public class EditQueueStatusRepositoryGateway implements EditQueueStatusGateway 
         Optional<QueueEntity> queueEntity = queueRepository.findById(id);
         Queue queue = queueEntityMapper.toDomainEdit(queueEntity);
         QueueEntity queueEntityToSave = queueEntityMapper.toEntityEdit(queue, queueStatusEnum);
-        return queueEntityMapper.toDomainEdit(queueEntityToSave);
+        QueueEntity objSaved = queueRepository.save(queueEntityToSave);
+        return queueEntityMapper.toDomainEdit(objSaved);
     }
 
 }

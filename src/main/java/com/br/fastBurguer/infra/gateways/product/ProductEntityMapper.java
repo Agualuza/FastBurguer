@@ -14,7 +14,7 @@ public class ProductEntityMapper {
     }
 
     public Product toDomain(ProductEntity productEntity) {
-        return new Product(productEntity.getName(), productEntity.getDescription(), productEntity.getPrice(), productEntity.getType());
+        return new Product(productEntity .getId() ,productEntity.getName(), productEntity.getDescription(), productEntity.getPrice(), productEntity.getType());
     }
 
     public Product toDomain(Optional<ProductEntity> productEntity) {

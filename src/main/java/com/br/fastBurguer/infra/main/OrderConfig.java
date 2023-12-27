@@ -7,6 +7,7 @@ import com.br.fastBurguer.application.gateways.CreateOrderGateway;
 import com.br.fastBurguer.application.gateways.FindAllOrdersGateway;
 import com.br.fastBurguer.application.gateways.FindProductByIdGateway;
 import com.br.fastBurguer.application.useCases.CreateOrder;
+import com.br.fastBurguer.application.useCases.CreateQueue;
 import com.br.fastBurguer.application.useCases.FindAllOrders;
 import com.br.fastBurguer.application.useCases.FindClientById;
 import com.br.fastBurguer.infra.controllers.order.OrderDTOMapper;
@@ -19,8 +20,9 @@ import com.br.fastBurguer.infra.persistence.order.OrderRepository;
 public class OrderConfig {
 
     @Bean
-    CreateOrder createOrder(CreateOrderGateway createOrderGateway, FindClientById findClientById) {
-        return new CreateOrder(createOrderGateway, findClientById);
+    CreateOrder createOrder(CreateOrderGateway createOrderGateway, FindClientById findClientById,
+            CreateQueue createQueue) {
+        return new CreateOrder(createOrderGateway, findClientById, createQueue);
     }
 
     @Bean

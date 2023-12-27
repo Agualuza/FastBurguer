@@ -10,10 +10,12 @@ public class CreateOrder {
 
     private final CreateOrderGateway createOrderGateway;
     private final FindClientById findClientById;
+    private final CreateQueue createQueue;
 
-    public CreateOrder(CreateOrderGateway createOrderGateway, FindClientById findClientById) {
+    public CreateOrder(CreateOrderGateway createOrderGateway, FindClientById findClientById, CreateQueue createQueue) {
         this.createOrderGateway = createOrderGateway;
         this.findClientById = findClientById;
+        this.createQueue = createQueue;
     }
 
     public Order createOrder(Long clientId, List<String> products) {
@@ -24,6 +26,10 @@ public class CreateOrder {
             throw new Error("Usuário não existe");
         }
 
-        return createOrderGateway.createOrder(clientFound.getId(), products);
+        Order orderCreated = createOrderGateway.createOrder(clientFound.getId(), products);
+
+        createQueue.createQueue(orderCreated.getId());
+
+        return orderCreated;
     }
 }

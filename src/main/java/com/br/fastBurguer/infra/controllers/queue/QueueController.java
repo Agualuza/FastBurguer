@@ -50,7 +50,7 @@ public class QueueController {
     @GetMapping()
     public ResponseEntity<List<Queue>> getAllQueueByStatus(
             @RequestParam("status") QueueStatusRequest queueStatusRequest) {
-        List<Queue> queues = findQueueByStatus.findQueueByStatus(queueStatusRequest.queueStatus());
+        List<Queue> queues = findQueueByStatus.findQueueByStatus(queueStatusRequest.getStatusQueue());
         return ResponseEntity.ok(queues);
     }
 
@@ -64,9 +64,9 @@ public class QueueController {
             })
     })
     @PutMapping("/{status}")
-    public ResponseEntity<QueueResponse> putStatusQueue(@RequestBody QueueEditRequest queueEditRequest,
-            @PathVariable QueueStatusRequest queueStatusRequest) {
-        Queue queueEdited = editQueueStatus.editQueueStatus(queueEditRequest.id(), queueEditRequest.queueStatusEnum());
+    public ResponseEntity<QueueResponse> putStatusQueue(@RequestBody QueueEditRequestBody queueEditRequest,
+            @PathVariable QueueStatusRequest status) {
+        Queue queueEdited = editQueueStatus.editQueueStatus(queueEditRequest.id(), status.getStatusQueue());
         return ResponseEntity.ok(queueDTOMapper.toResponse(queueEdited));
     }
 }

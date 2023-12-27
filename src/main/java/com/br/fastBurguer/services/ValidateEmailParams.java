@@ -1,12 +1,11 @@
-package com.br.fastBurguer.utils;
+package com.br.fastBurguer.services;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.stereotype.Service;
+import com.br.fastBurguer.adapters.ValidateEmailGateway;
 
-@Service
-public class ConvertEmailParams {
+public class ValidateEmailParams implements ValidateEmailGateway {
     
     public boolean isEmailValid(String email) {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";

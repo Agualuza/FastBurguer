@@ -21,7 +21,7 @@ public class CreateClient {
 
         Cpf cpf = createCpf.createCpf(client);
 
-        Email email = createEmail.createClientEmail(client, client.getEmail());
+        Email email = createEmail.createClientEmail(client);
 
         Client clientToPersist = new Client(client.getName(), cpf, email, client.getIdentified());
 

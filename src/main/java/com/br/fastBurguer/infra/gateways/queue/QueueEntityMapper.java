@@ -5,56 +5,41 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
-import com.br.fastBurguer.core.entities.Order;
 import com.br.fastBurguer.core.entities.Queue;
-import com.br.fastBurguer.infra.gateways.order.OrderEntityMapper;
 import com.br.fastBurguer.infra.persistence.queue.QueueEntity;
 
 public class QueueEntityMapper {
 
-    private final OrderEntityMapper orderEntityMapper;
-
-    public QueueEntityMapper(OrderEntityMapper orderEntityMapper) {
-        this.orderEntityMapper = orderEntityMapper;
+    public QueueEntity toEntity(Long id) {
+        return new QueueEntity(id, QueueStatusEnum.RECEIVE.getValue());
     }
 
-    public QueueEntity toEntity(Order order) {
-        return new QueueEntity(orderEntityMapper.toEntity(order.getClientId(), order.getProducts()),
-                QueueStatusEnum.RECEIVE.getValue());
-    }
-
-    public Queue toDomain(Order order, String status) {
-        return new Queue(order, status);
+    public Queue toDomain(Long id, Long orderId, String status) {
+        return new Queue(id, orderId, status);
     }
 
     public List<Queue> toDomainList(List<QueueEntity> queueEntities) {
         List<Queue> itemsToReturn = new ArrayList<>();
 
         for (QueueEntity queue : queueEntities) {
-            Queue orderToAdd = toDomain(
-                    orderEntityMapper.toDomain(queue.getOrderEntity().getClientId(), queue.getOrderEntity()),
-                    queue.getStatus());
-            itemsToReturn.add(orderToAdd);
+            Queue queueToAdd = toDomain(queue.getId() ,queue.getOrderId(), queue.getStatus());
+            itemsToReturn.add(queueToAdd);
         }
 
         return itemsToReturn;
     }
 
     public QueueEntity toEntityEdit(Queue queue, QueueStatusEnum statusEnum) {
-        return new QueueEntity(queue.getId(),
-                orderEntityMapper.toEntity(queue.getOrder().getClientId(), queue.getOrder().getProducts()),
-                statusEnum.getValue());
+        return new QueueEntity(queue.getId(), queue.getOrderId() ,statusEnum.getValue());
     }
 
     public Queue toDomainEdit(Optional<QueueEntity> queueEntity) {
-        return new Queue(queueEntity.get().getId(), orderEntityMapper
-                .toDomain(queueEntity.get().getOrderEntity().getClientId(), queueEntity.get().getOrderEntity()),
+        return new Queue(queueEntity.get().getId(), queueEntity.get().getOrderId(),
                 queueEntity.get().getStatus());
     }
 
     public Queue toDomainEdit(QueueEntity queueEntity) {
-        return new Queue(queueEntity.getId(),
-                orderEntityMapper.toDomain(queueEntity.getOrderEntity().getClientId(), queueEntity.getOrderEntity()),
+        return new Queue(queueEntity.getId(), queueEntity.getOrderId(),
                 queueEntity.getStatus());
     }
 }

@@ -1,7 +1,6 @@
 package com.br.fastBurguer.infra.gateways.queue;
 
 import com.br.fastBurguer.application.gateways.CreateQueueGateway;
-import com.br.fastBurguer.core.entities.Order;
 import com.br.fastBurguer.core.entities.Queue;
 import com.br.fastBurguer.infra.persistence.queue.QueueEntity;
 import com.br.fastBurguer.infra.persistence.queue.QueueRepository;
@@ -17,10 +16,10 @@ public class CreateQueueRepositoryGateway implements CreateQueueGateway {
     }
 
     @Override
-    public Queue createQueue(Order order) {
-        QueueEntity queueEntity = queueEntityMapper.toEntity(order);
+    public Queue createQueue(Long orderId) {
+        QueueEntity queueEntity = queueEntityMapper.toEntity(orderId);
         QueueEntity savedObj = queueRepository.save(queueEntity);
-        return queueEntityMapper.toDomain(order, savedObj.getStatus());
+        return queueEntityMapper.toDomain(savedObj.getId(), orderId, savedObj.getStatus());
     }
 
 }

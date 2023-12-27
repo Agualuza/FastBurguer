@@ -10,7 +10,6 @@ import com.br.fastBurguer.application.useCases.CreateQueue;
 import com.br.fastBurguer.application.useCases.EditQueueStatus;
 import com.br.fastBurguer.application.useCases.FindQueueByStatus;
 import com.br.fastBurguer.infra.controllers.queue.QueueDTOMapper;
-import com.br.fastBurguer.infra.gateways.order.OrderEntityMapper;
 import com.br.fastBurguer.infra.gateways.queue.CreateQueueRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.EditQueueStatusRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.FindQueueByStatusRepository;
@@ -53,8 +52,8 @@ public class QueueConfig {
     }
 
     @Bean
-    QueueEntityMapper queueEntityMapper(OrderEntityMapper orderEntityMapper) {
-        return new QueueEntityMapper(orderEntityMapper);
+    QueueEntityMapper queueEntityMapper() {
+        return new QueueEntityMapper();
     }
 
     @Bean
