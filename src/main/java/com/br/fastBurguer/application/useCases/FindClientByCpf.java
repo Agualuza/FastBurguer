@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.FindClientByCpfGateway;
+import com.br.fastBurguer.adapters.gateways.client.FindClientByCpfGateway;
 import com.br.fastBurguer.core.entities.Client;
 
 public class FindClientByCpf {

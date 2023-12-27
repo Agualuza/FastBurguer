@@ -2,7 +2,8 @@ package com.br.fastBurguer.infra.gateways.order;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.FindAllOrdersGateway;
+import com.br.fastBurguer.adapters.gateways.order.FindAllOrdersGateway;
+import com.br.fastBurguer.adapters.presenters.order.OrderEntityMapper;
 import com.br.fastBurguer.core.entities.Order;
 import com.br.fastBurguer.infra.persistence.order.OrderEntity;
 import com.br.fastBurguer.infra.persistence.order.OrderRepository;

@@ -2,7 +2,7 @@ package com.br.fastBurguer.application.useCases;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.FindQueueByStatusGateway;
+import com.br.fastBurguer.adapters.gateways.queue.FindQueueByStatusGateway;
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
 import com.br.fastBurguer.core.entities.Queue;
 

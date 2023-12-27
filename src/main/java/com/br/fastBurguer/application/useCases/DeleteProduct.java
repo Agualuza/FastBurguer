@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.DeleteProductGateway;
+import com.br.fastBurguer.adapters.gateways.product.DeleteProductGateway;
 
 public class DeleteProduct {
 

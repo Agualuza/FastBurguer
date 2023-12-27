@@ -3,17 +3,17 @@ package com.br.fastBurguer.infra.main;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.br.fastBurguer.application.gateways.CreateOrderGateway;
-import com.br.fastBurguer.application.gateways.FindAllOrdersGateway;
-import com.br.fastBurguer.application.gateways.FindProductByIdGateway;
+import com.br.fastBurguer.adapters.gateways.order.CreateOrderGateway;
+import com.br.fastBurguer.adapters.gateways.order.FindAllOrdersGateway;
+import com.br.fastBurguer.adapters.gateways.product.FindProductByIdGateway;
+import com.br.fastBurguer.adapters.presenters.order.OrderDTOMapper;
+import com.br.fastBurguer.adapters.presenters.order.OrderEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateOrder;
 import com.br.fastBurguer.application.useCases.CreateQueue;
 import com.br.fastBurguer.application.useCases.FindAllOrders;
 import com.br.fastBurguer.application.useCases.FindClientById;
-import com.br.fastBurguer.infra.controllers.order.OrderDTOMapper;
 import com.br.fastBurguer.infra.gateways.order.CreateOrderRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindAllOrdersRepositoryGateway;
-import com.br.fastBurguer.infra.gateways.order.OrderEntityMapper;
 import com.br.fastBurguer.infra.persistence.order.OrderRepository;
 
 @Configuration

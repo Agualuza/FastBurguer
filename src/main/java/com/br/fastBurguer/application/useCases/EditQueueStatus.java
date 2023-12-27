@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.EditQueueStatusGateway;
+import com.br.fastBurguer.adapters.gateways.queue.EditQueueStatusGateway;
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
 import com.br.fastBurguer.core.entities.Queue;
 

@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.adapters.ValidateEmailGateway;
+import com.br.fastBurguer.adapters.gateways.email.ValidateEmailGateway;
 import com.br.fastBurguer.core.Enums.ClientIdentifyByEnum;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.core.entities.Email;

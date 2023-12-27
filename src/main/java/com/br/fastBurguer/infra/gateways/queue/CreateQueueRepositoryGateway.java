@@ -1,6 +1,7 @@
 package com.br.fastBurguer.infra.gateways.queue;
 
-import com.br.fastBurguer.application.gateways.CreateQueueGateway;
+import com.br.fastBurguer.adapters.gateways.queue.CreateQueueGateway;
+import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.core.entities.Queue;
 import com.br.fastBurguer.infra.persistence.queue.QueueEntity;
 import com.br.fastBurguer.infra.persistence.queue.QueueRepository;

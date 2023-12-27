@@ -2,7 +2,8 @@ package com.br.fastBurguer.infra.gateways.client;
 
 import java.util.Optional;
 
-import com.br.fastBurguer.application.gateways.FindClientByIdGateway;
+import com.br.fastBurguer.adapters.gateways.client.FindClientByIdGateway;
+import com.br.fastBurguer.adapters.presenters.client.ClientEntityMapper;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.infra.persistence.client.ClientEntity;
 import com.br.fastBurguer.infra.persistence.client.ClientRepository;

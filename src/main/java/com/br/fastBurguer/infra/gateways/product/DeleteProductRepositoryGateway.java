@@ -1,6 +1,6 @@
 package com.br.fastBurguer.infra.gateways.product;
 
-import com.br.fastBurguer.application.gateways.DeleteProductGateway;
+import com.br.fastBurguer.adapters.gateways.product.DeleteProductGateway;
 import com.br.fastBurguer.infra.persistence.products.ProdutcRepository;
 
 public class DeleteProductRepositoryGateway implements DeleteProductGateway {

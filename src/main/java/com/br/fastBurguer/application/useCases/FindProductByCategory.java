@@ -2,7 +2,7 @@ package com.br.fastBurguer.application.useCases;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.FindProductByCategoryGateway;
+import com.br.fastBurguer.adapters.gateways.product.FindProductByCategoryGateway;
 import com.br.fastBurguer.core.entities.Product;
 
 public class FindProductByCategory {

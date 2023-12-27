@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.EditProductGateway;
+import com.br.fastBurguer.adapters.gateways.product.EditProductGateway;
 import com.br.fastBurguer.core.entities.Product;
 
 public class EditProduct {

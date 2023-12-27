@@ -2,7 +2,8 @@ package com.br.fastBurguer.infra.gateways.queue;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.FindQueueByStatusGateway;
+import com.br.fastBurguer.adapters.gateways.queue.FindQueueByStatusGateway;
+import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
 import com.br.fastBurguer.core.entities.Queue;
 import com.br.fastBurguer.infra.persistence.queue.QueueEntity;

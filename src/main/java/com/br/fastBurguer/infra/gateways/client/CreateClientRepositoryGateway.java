@@ -1,6 +1,7 @@
 package com.br.fastBurguer.infra.gateways.client;
 
-import com.br.fastBurguer.application.gateways.CreateClientGateway;
+import com.br.fastBurguer.adapters.gateways.client.CreateClientGateway;
+import com.br.fastBurguer.adapters.presenters.client.ClientEntityMapper;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.infra.persistence.client.ClientEntity;
 import com.br.fastBurguer.infra.persistence.client.ClientRepository;

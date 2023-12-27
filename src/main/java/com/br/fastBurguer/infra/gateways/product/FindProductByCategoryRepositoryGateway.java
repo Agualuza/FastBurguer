@@ -2,7 +2,8 @@ package com.br.fastBurguer.infra.gateways.product;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.FindProductByCategoryGateway;
+import com.br.fastBurguer.adapters.gateways.product.FindProductByCategoryGateway;
+import com.br.fastBurguer.adapters.presenters.product.ProductEntityMapper;
 import com.br.fastBurguer.core.entities.Product;
 import com.br.fastBurguer.infra.persistence.products.ProductEntity;
 import com.br.fastBurguer.infra.persistence.products.ProdutcRepository;

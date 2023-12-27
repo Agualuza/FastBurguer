@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.CreateClientGateway;
+import com.br.fastBurguer.adapters.gateways.client.CreateClientGateway;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.core.entities.Cpf;
 import com.br.fastBurguer.core.entities.Email;

@@ -1,6 +1,6 @@
 package com.br.fastBurguer.services;
 
-import com.br.fastBurguer.adapters.ValidateCpfGateway;
+import com.br.fastBurguer.adapters.gateways.cpf.ValidateCpfGateway;
 
 public class ValidateCpf implements ValidateCpfGateway {
 

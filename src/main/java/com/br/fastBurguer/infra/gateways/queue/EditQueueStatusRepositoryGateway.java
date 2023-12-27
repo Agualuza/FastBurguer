@@ -2,7 +2,8 @@ package com.br.fastBurguer.infra.gateways.queue;
 
 import java.util.Optional;
 
-import com.br.fastBurguer.application.gateways.EditQueueStatusGateway;
+import com.br.fastBurguer.adapters.gateways.queue.EditQueueStatusGateway;
+import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
 import com.br.fastBurguer.core.entities.Queue;
 import com.br.fastBurguer.infra.persistence.queue.QueueEntity;

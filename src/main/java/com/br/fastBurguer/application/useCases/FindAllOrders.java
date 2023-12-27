@@ -2,7 +2,7 @@ package com.br.fastBurguer.application.useCases;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.FindAllOrdersGateway;
+import com.br.fastBurguer.adapters.gateways.order.FindAllOrdersGateway;
 import com.br.fastBurguer.core.entities.Order;
 
 public class FindAllOrders {

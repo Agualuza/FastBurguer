@@ -2,7 +2,7 @@ package com.br.fastBurguer.application.useCases;
 
 import java.util.List;
 
-import com.br.fastBurguer.application.gateways.CreateOrderGateway;
+import com.br.fastBurguer.adapters.gateways.order.CreateOrderGateway;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.core.entities.Order;
 

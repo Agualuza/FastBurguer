@@ -1,6 +1,6 @@
 package com.br.fastBurguer.application.useCases;
 
-import com.br.fastBurguer.application.gateways.FindCpfGateway;
+import com.br.fastBurguer.adapters.gateways.cpf.FindCpfGateway;
 import com.br.fastBurguer.core.entities.Cpf;
 
 public class FindCpf {
