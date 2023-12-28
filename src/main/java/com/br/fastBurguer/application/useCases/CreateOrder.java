@@ -18,7 +18,7 @@ public class CreateOrder {
         this.createQueue = createQueue;
     }
 
-    public Order createOrder(Long clientId, List<String> products) {
+    public Order createOrder(Long clientId, List<Long> products) {
 
         Client clientFound = findClientById.findClientById(clientId);
 

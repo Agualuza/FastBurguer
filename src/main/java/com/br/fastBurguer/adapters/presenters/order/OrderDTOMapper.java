@@ -15,18 +15,28 @@ public class OrderDTOMapper {
         this.findProductByIdGateway = findProductByIdGateway;
     }
 
-    public List<String> toOrder(CreateOrderRequest createOrderRequest) {
-
-        List<String> products = new ArrayList<>();
-        for (Long id : createOrderRequest.products()) {
-            Product product = findProductByIdGateway.findProductById(id);
-            products.add(product.getName());
-        }
-
-        return products;
+    public List<Long> toDomain(CreateOrderRequest createOrderRequest) {
+        return createOrderRequest.products();
     }
 
     public FindAllOrdersResponse toListResponse(List<Order> orders) {
-        return new FindAllOrdersResponse(orders);
+
+        List<FindOrderResponse> responseOrders = new ArrayList<>();
+
+        for (Order order : orders) {
+            List<Product> products = new ArrayList<>();
+            for (Long id : order.getProducts()) {
+                Product product = findProductByIdGateway.findProductById(id);
+                products.add(product);
+            }
+            FindOrderResponse orderResponseToAdd = new FindOrderResponse(order.getId(), order.getClientId(), products);
+            responseOrders.add(orderResponseToAdd);
+        }
+
+        return new FindAllOrdersResponse(responseOrders);
+    }
+
+    public FindOrderByPaymentStatusResponse findOrderByPaymentStatusResponse(Order order) {
+        return new FindOrderByPaymentStatusResponse(order.getId(), order.isPaymentApproved());
     }
 }

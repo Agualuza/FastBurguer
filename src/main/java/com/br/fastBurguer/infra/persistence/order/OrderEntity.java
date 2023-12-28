@@ -22,12 +22,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderEntity {
 
-    public OrderEntity(@NotNull Long clientId, @NotNull List<String> products) {
+    public OrderEntity(@NotNull Long clientId, @NotNull List<Long> products) {
         this.clientId = clientId;
         this.products = products;
     }
 
-    public OrderEntity(Optional<Client> clientOptional, List<String> products) {
+    public OrderEntity(Optional<Client> clientOptional, List<Long> products) {
     }
 
     @Id
@@ -38,5 +38,8 @@ public class OrderEntity {
     private Long clientId;
 
     @NotNull
-    List<String> products;
+    List<Long> products;
+
+    @NotNull
+    private boolean paymentApproved;
 }

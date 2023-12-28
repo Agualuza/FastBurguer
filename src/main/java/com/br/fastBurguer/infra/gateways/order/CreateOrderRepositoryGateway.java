@@ -20,10 +20,10 @@ public class CreateOrderRepositoryGateway implements CreateOrderGateway {
     }
 
     @Override
-    public Order createOrder(Long clientId, List<String> products) {
+    public Order createOrder(Long clientId, List<Long> products) {
         OrderEntity orderEntity = orderEntityMapper.toEntity(clientId, products);
         OrderEntity savedObj = orderRepository.save(orderEntity);
-        return orderEntityMapper.toDomain(savedObj.getClientId(), orderEntity);
+        return orderEntityMapper.toDomain(savedObj);
     }
 
 }
