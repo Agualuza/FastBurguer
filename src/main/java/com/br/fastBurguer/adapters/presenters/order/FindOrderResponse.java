@@ -7,6 +7,7 @@ import com.br.fastBurguer.core.entities.Product;
 public record FindOrderResponse(
         Long id,
         Long clientId,
-        List<Product> products) {
+        List<Product> products,
+        boolean paymentStatus) {
 
 }

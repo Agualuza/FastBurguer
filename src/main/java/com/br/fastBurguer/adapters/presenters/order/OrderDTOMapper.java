@@ -29,7 +29,7 @@ public class OrderDTOMapper {
                 Product product = findProductByIdGateway.findProductById(id);
                 products.add(product);
             }
-            FindOrderResponse orderResponseToAdd = new FindOrderResponse(order.getId(), order.getClientId(), products);
+            FindOrderResponse orderResponseToAdd = new FindOrderResponse(order.getId(), order.getClientId(), products, order.isPaymentApproved());
             responseOrders.add(orderResponseToAdd);
         }
 

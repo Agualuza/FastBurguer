@@ -4,17 +4,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fastBurguer.adapters.gateways.order.CreateOrderGateway;
+import com.br.fastBurguer.adapters.gateways.order.EditOrderPaymentStatusGateway;
 import com.br.fastBurguer.adapters.gateways.order.FindAllOrdersGateway;
-import com.br.fastBurguer.adapters.gateways.order.FindOrderByPaymentStatusGateway;
+import com.br.fastBurguer.adapters.gateways.order.FindOrderGateway;
 import com.br.fastBurguer.adapters.gateways.product.FindProductByIdGateway;
 import com.br.fastBurguer.adapters.presenters.order.OrderDTOMapper;
 import com.br.fastBurguer.adapters.presenters.order.OrderEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateOrder;
 import com.br.fastBurguer.application.useCases.CreateQueue;
+import com.br.fastBurguer.application.useCases.EditOrderPaymentStatus;
 import com.br.fastBurguer.application.useCases.FindAllOrders;
 import com.br.fastBurguer.application.useCases.FindClientById;
-import com.br.fastBurguer.application.useCases.FindOrderByPaymentStatus;
+import com.br.fastBurguer.application.useCases.FindOrder;
 import com.br.fastBurguer.infra.gateways.order.CreateOrderRepositoryGateway;
+import com.br.fastBurguer.infra.gateways.order.EditOrderPaymentStatusRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindAllOrdersRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindOrderByPaymentStatusRepositoryGateway;
 import com.br.fastBurguer.infra.persistence.order.OrderRepository;
@@ -34,8 +37,13 @@ public class OrderConfig {
     }
 
     @Bean
-    FindOrderByPaymentStatus findOrderByPaymentStatus(FindOrderByPaymentStatusGateway findOrderByPaymentStatusGateway){
-        return new FindOrderByPaymentStatus(findOrderByPaymentStatusGateway);
+    FindOrder findOrderByPaymentStatus(FindOrderGateway findOrderByPaymentStatusGateway){
+        return new FindOrder(findOrderByPaymentStatusGateway);
+    }
+
+    @Bean
+    EditOrderPaymentStatus editOrderPaymentStatus(EditOrderPaymentStatusGateway editOrderPaymentStatusGateway, FindOrder findOrder) {
+        return new EditOrderPaymentStatus(editOrderPaymentStatusGateway, findOrder);
     }
 
     @Bean
@@ -50,8 +58,13 @@ public class OrderConfig {
     }
 
     @Bean
-    FindOrderByPaymentStatusGateway findOrderByPaymentStatusGateway(OrderEntityMapper orderEntityMapper, OrderRepository orderRepository) {
+    FindOrderGateway findOrderByPaymentStatusGateway(OrderEntityMapper orderEntityMapper, OrderRepository orderRepository) {
         return new FindOrderByPaymentStatusRepositoryGateway(orderRepository, orderEntityMapper);
+    }
+
+    @Bean
+    EditOrderPaymentStatusGateway editOrderPaymentStatusGateway(OrderEntityMapper orderEntityMapper, OrderRepository orderRepository) {
+        return new EditOrderPaymentStatusRepositoryGateway(orderRepository, orderEntityMapper);
     }
 
     @Bean

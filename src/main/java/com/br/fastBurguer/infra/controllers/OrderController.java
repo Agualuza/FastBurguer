@@ -17,7 +17,7 @@ import com.br.fastBurguer.adapters.presenters.order.FindOrderByPaymentStatusResp
 import com.br.fastBurguer.adapters.presenters.order.OrderDTOMapper;
 import com.br.fastBurguer.application.useCases.CreateOrder;
 import com.br.fastBurguer.application.useCases.FindAllOrders;
-import com.br.fastBurguer.application.useCases.FindOrderByPaymentStatus;
+import com.br.fastBurguer.application.useCases.FindOrder;
 import com.br.fastBurguer.core.entities.Order;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,10 +35,10 @@ public class OrderController {
     private final CreateOrder createOrder;
     private final FindAllOrders findAllOrders;
     private final OrderDTOMapper orderDTOMapper;
-    private final FindOrderByPaymentStatus findOrderByPaymentStatus;
+    private final FindOrder findOrderByPaymentStatus;
 
     public OrderController(CreateOrder createOrder, OrderDTOMapper orderDTOMapper, FindAllOrders findAllOrders,
-            FindOrderByPaymentStatus findOrderByPaymentStatus) {
+            FindOrder findOrderByPaymentStatus) {
         this.createOrder = createOrder;
         this.orderDTOMapper = orderDTOMapper;
         this.findAllOrders = findAllOrders;
@@ -94,7 +94,7 @@ public class OrderController {
     })
     @GetMapping("/paymentStatus")
     public ResponseEntity<FindOrderByPaymentStatusResponse> getOrderByStatus(@RequestParam("orderId") Long orderId) {
-        Order order = findOrderByPaymentStatus.findOrderByPaymentStatus(orderId);
+        Order order = findOrderByPaymentStatus.findOrder(orderId);
         return ResponseEntity.ok(orderDTOMapper.findOrderByPaymentStatusResponse(order));
     }
 }

@@ -16,6 +16,13 @@ public class Order {
         this.products = products;
     }
 
+    public Order(Long id, Long clientId, List<Long> products, boolean paymentApproved) {
+        this.id = id;
+        this.clientId = clientId;
+        this.products = products;
+        this.paymentApproved = paymentApproved;
+    }
+
     public Order(Optional<Client> clientOptional, List<Long> products) {
     }
 

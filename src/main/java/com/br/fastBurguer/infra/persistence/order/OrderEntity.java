@@ -22,6 +22,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderEntity {
 
+    public OrderEntity(@NotNull Long id, @NotNull Long clientId, @NotNull List<Long> products) {
+        this.clientId = clientId;
+        this.products = products;
+        this.id = id;
+    }
+
     public OrderEntity(@NotNull Long clientId, @NotNull List<Long> products) {
         this.clientId = clientId;
         this.products = products;

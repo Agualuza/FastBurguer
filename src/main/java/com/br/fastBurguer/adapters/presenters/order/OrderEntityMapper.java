@@ -13,12 +13,22 @@ public class OrderEntityMapper {
         return new OrderEntity(clientId, products);
     }
 
+    public OrderEntity toEntityEdit(Order order) {
+        return new OrderEntity(order.getId(), order.getClientId(), order.getProducts());
+    }
+
+    public OrderEntity toEntityEditPaymentStatus(Order order) {
+        return new OrderEntity(order.getId(), order.getClientId(), order.getProducts(), order.isPaymentApproved());
+    }
+
     public Order toDomain(OrderEntity orderEntity) {
-        return new Order(orderEntity.getId(), orderEntity.getClientId(), orderEntity.getProducts());
+        return new Order(orderEntity.getId(), orderEntity.getClientId(), orderEntity.getProducts(),
+                orderEntity.isPaymentApproved());
     }
 
     public Order toDomain(Optional<OrderEntity> orderEntity) {
-        return new Order(orderEntity.get().getId(), orderEntity.get().getClientId(), orderEntity.get().getProducts());
+        return new Order(orderEntity.get().getId(), orderEntity.get().getClientId(), orderEntity.get().getProducts(),
+                orderEntity.get().isPaymentApproved());
     }
 
     public List<Order> toListDomain(List<OrderEntity> orderEntities) {
