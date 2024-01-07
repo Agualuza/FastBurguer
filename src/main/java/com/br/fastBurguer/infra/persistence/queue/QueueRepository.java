@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QueueRepository extends JpaRepository<QueueEntity, Long>{
+public interface QueueRepository extends JpaRepository<QueueEntity, Long> {
      public List<QueueEntity> findByStatus(String type);
+
+     public QueueEntity findByOrderId(Long orderId);
 }

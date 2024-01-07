@@ -4,7 +4,7 @@ public enum QueueStatusEnum {
 
     RECEIVE("Recebido"),
     DOING("Em preparação"),
-    READY("PRONTO"),
+    READY("Pronto"),
     DONE("Finalizado");
 
     private String value;

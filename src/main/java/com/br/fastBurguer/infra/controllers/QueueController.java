@@ -70,7 +70,7 @@ public class QueueController {
     @PutMapping("/{status}")
     public ResponseEntity<QueueResponse> putStatusQueue(@RequestBody QueueEditRequestBody queueEditRequest,
             @PathVariable QueueStatusRequest status) {
-        Queue queueEdited = editQueueStatus.editQueueStatus(queueEditRequest.id(), status.getStatusQueue());
+        Queue queueEdited = editQueueStatus.editQueueStatus(queueEditRequest.orderId(), status.getStatusQueue());
         return ResponseEntity.ok(queueDTOMapper.toResponse(queueEdited));
     }
 }

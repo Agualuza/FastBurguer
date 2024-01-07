@@ -5,5 +5,5 @@ import com.br.fastBurguer.core.entities.Queue;
 
 public interface EditQueueStatusGateway {
 
-    public Queue editQueueStatus(Long id, QueueStatusEnum queueStatusEnum);
+    public Queue editQueueStatus(Long orderId, QueueStatusEnum queueStatusEnum);
 }

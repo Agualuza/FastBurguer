@@ -12,7 +12,7 @@ public class EditQueueStatus {
         this.editQueueStatusGateway = editQueueStatusGateway;
     }
 
-    public Queue editQueueStatus(Long id, QueueStatusEnum queueStatusEnum) {
-        return editQueueStatusGateway.editQueueStatus(id, queueStatusEnum);
+    public Queue editQueueStatus(Long orderId, QueueStatusEnum queueStatusEnum) {
+        return editQueueStatusGateway.editQueueStatus(orderId, queueStatusEnum);
     }
 }

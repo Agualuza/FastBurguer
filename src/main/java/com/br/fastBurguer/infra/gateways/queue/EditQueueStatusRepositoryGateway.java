@@ -1,7 +1,5 @@
 package com.br.fastBurguer.infra.gateways.queue;
 
-import java.util.Optional;
-
 import com.br.fastBurguer.adapters.gateways.queue.EditQueueStatusGateway;
 import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
@@ -20,8 +18,8 @@ public class EditQueueStatusRepositoryGateway implements EditQueueStatusGateway 
     }
 
     @Override
-    public Queue editQueueStatus(Long id, QueueStatusEnum queueStatusEnum) {
-        Optional<QueueEntity> queueEntity = queueRepository.findById(id);
+    public Queue editQueueStatus(Long orderId, QueueStatusEnum queueStatusEnum) {
+        QueueEntity queueEntity = queueRepository.findByOrderId(orderId);
         Queue queue = queueEntityMapper.toDomainEdit(queueEntity);
         QueueEntity queueEntityToSave = queueEntityMapper.toEntityEdit(queue, queueStatusEnum);
         QueueEntity objSaved = queueRepository.save(queueEntityToSave);
