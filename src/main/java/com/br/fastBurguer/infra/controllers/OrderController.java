@@ -114,7 +114,7 @@ public class OrderController {
     })
     @GetMapping("/orderByProducts")
     public ResponseEntity<FindOrderByProductsResponse> getOrderByProducts(@RequestBody FindOrderByProductsRequest findOrderByProductsRequest) {
-        Order order = findOrderByProducts.findOrderByProducts(findOrderByProductsRequest.products());
-        return ResponseEntity.ok(orderDTOMapper.findOrderByProductsResponse(order));
+        List<Order> orders = findOrderByProducts.findOrderByProducts(findOrderByProductsRequest.products());
+        return ResponseEntity.ok(orderDTOMapper.findOrderByProductsResponse(orders));
     }
 }

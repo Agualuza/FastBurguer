@@ -39,4 +39,14 @@ public class OrderDTOMapper {
     public FindOrderByPaymentStatusResponse findOrderByPaymentStatusResponse(Order order) {
         return new FindOrderByPaymentStatusResponse(order.getId(), order.isPaymentApproved());
     }
+
+    public FindOrderByProductsResponse findOrderByProductsResponse(List<Order> orders) {
+        List<Long> responseIds = new ArrayList<>();
+
+        for(Order order : orders) {
+            responseIds.add(order.getId());
+        }
+
+        return new FindOrderByProductsResponse(responseIds);
+    }
 }
