@@ -14,10 +14,13 @@ import com.br.fastBurguer.adapters.presenters.client.CreateClientRequest;
 import com.br.fastBurguer.adapters.presenters.order.CreateOrderRequest;
 import com.br.fastBurguer.adapters.presenters.order.FindAllOrdersResponse;
 import com.br.fastBurguer.adapters.presenters.order.FindOrderByPaymentStatusResponse;
+import com.br.fastBurguer.adapters.presenters.order.FindOrderByProductsRequest;
+import com.br.fastBurguer.adapters.presenters.order.FindOrderByProductsResponse;
 import com.br.fastBurguer.adapters.presenters.order.OrderDTOMapper;
 import com.br.fastBurguer.application.useCases.CreateOrder;
 import com.br.fastBurguer.application.useCases.FindAllOrders;
 import com.br.fastBurguer.application.useCases.FindOrder;
+import com.br.fastBurguer.application.useCases.FindOrderByProducts;
 import com.br.fastBurguer.core.entities.Order;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,13 +39,15 @@ public class OrderController {
     private final FindAllOrders findAllOrders;
     private final OrderDTOMapper orderDTOMapper;
     private final FindOrder findOrderByPaymentStatus;
+    private final FindOrderByProducts findOrderByProducts;
 
     public OrderController(CreateOrder createOrder, OrderDTOMapper orderDTOMapper, FindAllOrders findAllOrders,
-            FindOrder findOrderByPaymentStatus) {
+            FindOrder findOrderByPaymentStatus, FindOrderByProducts findOrderByProducts) {
         this.createOrder = createOrder;
         this.orderDTOMapper = orderDTOMapper;
         this.findAllOrders = findAllOrders;
         this.findOrderByPaymentStatus = findOrderByPaymentStatus;
+        this.findOrderByProducts = findOrderByProducts;
     }
 
     @Operation(summary = "Create Order")
@@ -96,5 +101,20 @@ public class OrderController {
     public ResponseEntity<FindOrderByPaymentStatusResponse> getOrderByStatus(@RequestParam("orderId") Long orderId) {
         Order order = findOrderByPaymentStatus.findOrder(orderId);
         return ResponseEntity.ok(orderDTOMapper.findOrderByPaymentStatusResponse(order));
+    }
+
+    @Operation(summary = "Find Order By Products List")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Orders List Found", content = {
+                    @Content
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                    @Content
+            })
+    })
+    @GetMapping("/orderByProducts")
+    public ResponseEntity<FindOrderByProductsResponse> getOrderByProducts(@RequestBody FindOrderByProductsRequest findOrderByProductsRequest) {
+        Order order = findOrderByProducts.findOrderByProducts(findOrderByProductsRequest.products());
+        return ResponseEntity.ok(orderDTOMapper.findOrderByProductsResponse(order));
     }
 }
