@@ -1,5 +1,6 @@
 package com.br.fastBurguer.adapters.presenters.order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class OrderDTOMapper {
 
         List<FindOrderResponse> responseOrders = new ArrayList<>();
 
+        List<FindOrderResponse> responseOrdersReady = new ArrayList<>();
+        List<FindOrderResponse> responseOrdersDoing = new ArrayList<>();
+        List<FindOrderResponse> responseOrdersReceive = new ArrayList<>();
+
         for (Order order : orders) {
             List<Product> products = new ArrayList<>();
             for (Long id : order.getProducts()) {
@@ -36,12 +41,33 @@ public class OrderDTOMapper {
             Queue queue = findQueueByOrderId.findQueueByOrderId(order.getId());
 
             if (!queue.getStatus().equalsIgnoreCase("finalizado")) {
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
                 FindOrderResponse orderResponseToAdd = new FindOrderResponse(order.getId(), order.getClientId(),
                         products,
-                        queue.getStatus(), order.isPaymentApproved());
-                responseOrders.add(orderResponseToAdd);
+                        queue.getStatus(), order.isPaymentApproved(), dateFormat.format(order.getCreatedAt()));
+
+                switch (queue.getStatus()) {
+                    case "Pronto":
+                        responseOrdersReady.add(orderResponseToAdd);
+                        break;
+                    case "Em preparação":
+                        responseOrdersDoing.add(orderResponseToAdd);
+                        break;
+                    case "Recebido":
+                        responseOrdersReceive.add(orderResponseToAdd);
+                        break;
+                    default:
+                        break;
+
+                }
             }
         }
+
+        responseOrders.addAll(responseOrdersReady);
+        responseOrders.addAll(responseOrdersDoing);
+        responseOrders.addAll(responseOrdersReceive);
 
         return new FindAllOrdersResponse(responseOrders);
     }

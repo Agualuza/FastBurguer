@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
+    List<OrderEntity> findAllByOrderByCreatedAtAsc();
+
     @Query("SELECT o FROM OrderEntity o WHERE o.products = :products")
     public List<OrderEntity> findByProducts(@Param("products") List<Long> products);
 }

@@ -23,12 +23,12 @@ public class OrderEntityMapper {
 
     public Order toDomain(OrderEntity orderEntity) {
         return new Order(orderEntity.getId(), orderEntity.getClientId(), orderEntity.getProducts(),
-                orderEntity.isPaymentApproved());
+                orderEntity.isPaymentApproved(), orderEntity.getCreatedAt());
     }
 
     public Order toDomain(Optional<OrderEntity> orderEntity) {
         return new Order(orderEntity.get().getId(), orderEntity.get().getClientId(), orderEntity.get().getProducts(),
-                orderEntity.get().isPaymentApproved());
+                orderEntity.get().isPaymentApproved(), orderEntity.get().getCreatedAt());
     }
 
     public List<Order> toListDomain(List<OrderEntity> orderEntities) {

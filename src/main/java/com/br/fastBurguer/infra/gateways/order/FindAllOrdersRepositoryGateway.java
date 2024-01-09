@@ -20,7 +20,7 @@ public class FindAllOrdersRepositoryGateway implements FindAllOrdersGateway {
 
     @Override
     public List<Order> findAllOrders() {
-        List<OrderEntity> ordersFound = orderRepository.findAll();
+        List<OrderEntity> ordersFound = orderRepository.findAllByOrderByCreatedAtAsc();
         return orderEntityMapper.toListDomain(ordersFound);
     }
 

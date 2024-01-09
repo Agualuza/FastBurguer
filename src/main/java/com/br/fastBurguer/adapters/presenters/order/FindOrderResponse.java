@@ -9,6 +9,7 @@ public record FindOrderResponse(
         Long clientId,
         List<Product> products,
         String orderStatus,
-        boolean paymentStatus) {
+        boolean paymentStatus,
+        String createdAt) {
 
 }
