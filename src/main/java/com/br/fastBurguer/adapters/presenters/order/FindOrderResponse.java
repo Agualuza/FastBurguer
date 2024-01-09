@@ -8,6 +8,7 @@ public record FindOrderResponse(
         Long id,
         Long clientId,
         List<Product> products,
+        String orderStatus,
         boolean paymentStatus) {
 
 }

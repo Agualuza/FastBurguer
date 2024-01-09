@@ -67,7 +67,6 @@ public class OrderController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
-        // criar queue
         return ResponseEntity.ok().build();
     }
 

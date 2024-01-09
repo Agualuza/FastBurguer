@@ -5,14 +5,17 @@ import org.springframework.context.annotation.Configuration;
 
 import com.br.fastBurguer.adapters.gateways.queue.CreateQueueGateway;
 import com.br.fastBurguer.adapters.gateways.queue.EditQueueStatusGateway;
+import com.br.fastBurguer.adapters.gateways.queue.FindQueueByOrderIdGateway;
 import com.br.fastBurguer.adapters.gateways.queue.FindQueueByStatusGateway;
 import com.br.fastBurguer.adapters.presenters.queue.QueueDTOMapper;
 import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateQueue;
 import com.br.fastBurguer.application.useCases.EditQueueStatus;
+import com.br.fastBurguer.application.useCases.FindQueueByOrderId;
 import com.br.fastBurguer.application.useCases.FindQueueByStatus;
 import com.br.fastBurguer.infra.gateways.queue.CreateQueueRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.EditQueueStatusRepositoryGateway;
+import com.br.fastBurguer.infra.gateways.queue.FindQueueByOrderIdRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.FindQueueByStatusRepository;
 import com.br.fastBurguer.infra.persistence.queue.QueueRepository;
 
@@ -35,6 +38,11 @@ public class QueueConfig {
     }
 
     @Bean
+    FindQueueByOrderId findQueueByOrderId(FindQueueByOrderIdGateway findQueueByOrderIdGateway) {
+        return new FindQueueByOrderId(findQueueByOrderIdGateway);
+    }
+
+    @Bean
     CreateQueueGateway createQueueGateway(QueueEntityMapper queueEntityMapper, QueueRepository queueRepository) {
         return new CreateQueueRepositoryGateway(queueEntityMapper, queueRepository);
     }
@@ -49,6 +57,12 @@ public class QueueConfig {
     FindQueueByStatusGateway findQueueByStatusGateway(QueueEntityMapper queueEntityMapper,
             QueueRepository queueRepository) {
         return new FindQueueByStatusRepository(queueEntityMapper, queueRepository);
+    }
+
+    @Bean
+    FindQueueByOrderIdGateway findQueueByOrderIdGateway(QueueEntityMapper queueEntityMapper,
+            QueueRepository queueRepository) {
+        return new FindQueueByOrderIdRepositoryGateway(queueEntityMapper, queueRepository);
     }
 
     @Bean

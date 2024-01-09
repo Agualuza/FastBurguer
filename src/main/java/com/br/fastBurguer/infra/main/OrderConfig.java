@@ -18,6 +18,7 @@ import com.br.fastBurguer.application.useCases.FindAllOrders;
 import com.br.fastBurguer.application.useCases.FindClientById;
 import com.br.fastBurguer.application.useCases.FindOrder;
 import com.br.fastBurguer.application.useCases.FindOrderByProducts;
+import com.br.fastBurguer.application.useCases.FindQueueByOrderId;
 import com.br.fastBurguer.infra.gateways.order.CreateOrderRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.EditOrderPaymentStatusRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindAllOrdersRepositoryGateway;
@@ -90,8 +91,9 @@ public class OrderConfig {
     }
 
     @Bean
-    OrderDTOMapper orderDTOMapper(FindProductByIdGateway findProductByIdGateway) {
-        return new OrderDTOMapper(findProductByIdGateway);
+    OrderDTOMapper orderDTOMapper(FindProductByIdGateway findProductByIdGateway,
+            FindQueueByOrderId findQueueByOrderId) {
+        return new OrderDTOMapper(findProductByIdGateway, findQueueByOrderId);
     }
 
 }
