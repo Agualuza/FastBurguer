@@ -21,7 +21,7 @@ public class SearchCpfRepositoryGateway implements FindCpfGateway {
     @Override
     public Cpf findCpf(String number) {
         Optional<CpfEntity> cpfEntity = cpfRepository.findByNumber(number);
-        return cpfEntityMapper.toDomain(cpfEntity);
+        return cpfEntityMapper.toCpfDomain(cpfEntity);
     }
 
     

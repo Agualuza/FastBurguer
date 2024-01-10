@@ -5,11 +5,11 @@ import com.br.fastBurguer.infra.persistence.email.EmailEntity;
 
 public class EmailEntityMapper {
 
-    public EmailEntity toEntity(Email emailDomain) {
-        return new EmailEntity(emailDomain.getAddress());
+    public EmailEntity toEmailEntity(Email email) {
+        return new EmailEntity(email.getAddress());
     }
 
-    public Email toDomain(EmailEntity emailEntity) {
-        return new Email(emailEntity.getAddress());
+    public Email toEmailDomain(EmailEntity emailEntity) {
+        return new Email(emailEntity.getId(), emailEntity.getAddress());
     }
 }

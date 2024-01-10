@@ -8,6 +8,8 @@ import com.br.fastBurguer.adapters.gateways.client.FindClientByCpfGateway;
 import com.br.fastBurguer.adapters.gateways.client.FindClientByIdGateway;
 import com.br.fastBurguer.adapters.presenters.client.ClientDTOMapper;
 import com.br.fastBurguer.adapters.presenters.client.ClientEntityMapper;
+import com.br.fastBurguer.adapters.presenters.cpf.CpfEntityMapper;
+import com.br.fastBurguer.adapters.presenters.email.EmailEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateClient;
 import com.br.fastBurguer.application.useCases.CreateCpf;
 import com.br.fastBurguer.application.useCases.CreateEmail;
@@ -55,8 +57,8 @@ public class ClientConfig {
     }
 
     @Bean
-    ClientEntityMapper clientEntityMapper() {
-        return new ClientEntityMapper();
+    ClientEntityMapper clientEntityMapper(CpfEntityMapper cpfEntityMapper, EmailEntityMapper emailEntityMapper) {
+        return new ClientEntityMapper(cpfEntityMapper, emailEntityMapper);
     }
 
     @Bean

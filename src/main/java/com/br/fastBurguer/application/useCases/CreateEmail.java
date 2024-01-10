@@ -26,7 +26,7 @@ public class CreateEmail {
             }
 
         } else {
-            emailToCreate = new Email(null);
+            emailToCreate = new Email("Sem cadastro");
         }
 
         return emailToCreate;

@@ -7,18 +7,18 @@ import com.br.fastBurguer.infra.persistence.cpf.CpfEntity;
 
 public class CpfEntityMapper {
 
-    public CpfEntity toEntity(Cpf cpfDomain) {
-        return new CpfEntity(cpfDomain.getNumber());
+    public CpfEntity toCpfEntity(Cpf cpf) {
+        return new CpfEntity(cpf.getNumber());
     }
 
-    public Cpf toDomain(CpfEntity cpfEntity) {
-        return new Cpf(cpfEntity.getNumber());
+    public Cpf toCpfDomain(CpfEntity cpfEntity) {
+        return new Cpf(cpfEntity.getId(), cpfEntity.getNumber());
     }
 
-    public Cpf toDomain(Optional<CpfEntity> cpfEntity) {
+    public Cpf toCpfDomain(Optional<CpfEntity> cpfEntity) {
         Cpf cpf;
 
-        if(cpfEntity.isPresent()){
+        if (cpfEntity.isPresent()) {
             cpf = new Cpf(cpfEntity.get().getNumber());
         } else {
             cpf = new Cpf();
@@ -26,4 +26,5 @@ public class CpfEntityMapper {
 
         return cpf;
     }
+
 }

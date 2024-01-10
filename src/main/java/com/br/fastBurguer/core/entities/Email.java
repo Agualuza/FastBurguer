@@ -9,6 +9,11 @@ public class Email {
         this.address = address;
     }
 
+    public Email(Long id, String address) {
+        this.id = id;
+        this.address = address;
+    }
+
     private Long id;
     private String address;
 

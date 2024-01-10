@@ -9,6 +9,12 @@ public class Cpf {
         this.number = number;
     }
 
+    public Cpf(Long id, String number) {
+        this.id = id;
+        this.number = number;
+    }
+
+
     private Long id;
     private String number;
 
