@@ -30,8 +30,8 @@ spec:
             - sh
             - -c
             - mysql -h 127.0.0.1 -uroot -proot -e "SELECT 1"
-          initialDelaySeconds: 30
-          periodSeconds: 10
+          initialDelaySeconds: 10
+          periodSeconds: 2
       - name: fastburguer-app
         image: gui182/fastburguer
         env:
@@ -56,3 +56,9 @@ spec:
             cpu: "300m"
         ports:
         - containerPort: 9080
+        readinessProbe:
+           httpGet:
+             path: /products
+             port: 9080
+           initialDelaySeconds: 10
+           periodSeconds: 2 
