@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"\",\r\n\t\"cpf\": {\r\n\t\t\"number\": \"123.123.123-54\"\r\n\t},\r\n\t\"email\": {\r\n\t\t\"address\": \"\"\r\n\t},\r\n\t\"identified\": \"CPF\"\r\n}",
+							"raw": "{\r\n\t\"name\": \"Guilherme\",\r\n\t\"cpf\": {\r\n\t\t\"number\": \"123.123.123-54\"\r\n\t},\r\n\t\"email\": {\r\n\t\t\"address\": \"teste@teste.com.br\"\r\n\t},\r\n\t\"identified\": \"CPF\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -33,7 +33,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{fastburguer}}/client?cpf=123236",
+							"raw": "{{fastburguer}}/client?cpf=12312312354",
 							"host": [
 								"{{fastburguer}}"
 							],
@@ -43,7 +43,7 @@
 							"query": [
 								{
 									"key": "cpf",
-									"value": "123236"
+									"value": "12312312354"
 								}
 							]
 						}
@@ -62,7 +62,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"Misto\",\r\n\t\"description\": \"com queijo\",\r\n\t\"price\": 4.99,\r\n\t\"type\": \"SANDWICH\"\r\n}",
+							"raw": "{\r\n\t\"name\": \"X-Burguer\",\r\n\t\"description\": \"com queijo\",\r\n\t\"price\": 9.99,\r\n\t\"type\": \"SANDWICH\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,7 +159,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"clientId\": 4,\r\n\t\"products\": [1,2,4]\r\n}",
+							"raw": "{\r\n\t\"clientId\": 1,\r\n\t\"products\": [1]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -178,6 +178,51 @@
 						"url": "{{fastburguer}}/order"
 					},
 					"response": []
+				},
+				{
+					"name": "Get Order Payment Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fastburguer}}/order/paymentStatus?orderId=1",
+							"host": [
+								"{{fastburguer}}"
+							],
+							"path": [
+								"order",
+								"paymentStatus"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OrderId By Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"products\": [1,2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/order/orderByProducts"
+					},
+					"response": []
 				}
 			]
 		},
@@ -190,7 +235,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{fastburguer}}/queue?status=RECEIVE",
+							"raw": "{{fastburguer}}/queue?status=DONE",
 							"host": [
 								"{{fastburguer}}"
 							],
@@ -200,7 +245,7 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "RECEIVE"
+									"value": "DONE"
 								}
 							]
 						}
@@ -214,14 +259,37 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"id\": 5\r\n}",
+							"raw": "{\r\n\t\"orderId\": 4\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{fastburguer}}/queue/RECEIVE"
+						"url": "{{fastburguer}}/queue/DOING"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PaymentWebhook",
+			"item": [
+				{
+					"name": "Send Payment Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"orderId\": 1,\r\n\t\"paymentStatus\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fastburguer}}/paymentWebhook"
 					},
 					"response": []
 				}
