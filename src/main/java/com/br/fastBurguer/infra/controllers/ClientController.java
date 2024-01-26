@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.fastBurguer.adapters.boundary.CreateClientBoundary;
+import com.br.fastBurguer.adapters.boundary.FindClientByCpfBoundary;
 import com.br.fastBurguer.adapters.presenters.client.ClientDTOMapper;
 import com.br.fastBurguer.adapters.presenters.client.CreateClientRequest;
 import com.br.fastBurguer.adapters.presenters.client.FindClientByCpfResponse;
-import com.br.fastBurguer.application.useCases.CreateClient;
-import com.br.fastBurguer.application.useCases.FindClientByCpf;
-import com.br.fastBurguer.core.entities.Client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,15 +27,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Client", description = "Create and search client.")
 public class ClientController {
 
-    private final CreateClient createClient;
-    private final FindClientByCpf findClientByCpf;
-    private final ClientDTOMapper clientDTOMapper;
+    private final CreateClientBoundary createClientBoundary;
+    private final FindClientByCpfBoundary findClientByCpfBoundary;
 
-    public ClientController(CreateClient createClient, FindClientByCpf findClientByCpf,
+    public ClientController(CreateClientBoundary createClientBoundary, FindClientByCpfBoundary findClientByCpfBoundary,
             ClientDTOMapper clientDTOMapper) {
-        this.createClient = createClient;
-        this.findClientByCpf = findClientByCpf;
-        this.clientDTOMapper = clientDTOMapper;
+        this.createClientBoundary = createClientBoundary;
+        this.findClientByCpfBoundary = findClientByCpfBoundary;
     }
 
     @Operation(summary = "Create Client")
@@ -51,10 +48,8 @@ public class ClientController {
     @PostMapping()
     public ResponseEntity<String> clientRegister(@RequestBody CreateClientRequest request) {
 
-        Client clientToCreate = clientDTOMapper.toClient(request);
-
         try {
-            createClient.createClient(clientToCreate);
+            createClientBoundary.createClient(request);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
         }
@@ -78,16 +73,11 @@ public class ClientController {
             throws JsonProcessingException {
 
         try {
-            Client clientToReturn = findClientByCpf.findClientByCpf(cpfValue);
-
-            if (clientToReturn != null) {
-                FindClientByCpfResponse createClientResponse = clientDTOMapper.toResponse(clientToReturn);
-                return ResponseEntity.ok(createClientResponse);
-            }
+            FindClientByCpfResponse clientToReturn = findClientByCpfBoundary.findClientByCpf(cpfValue);
+            return ResponseEntity.ok(clientToReturn);
+            
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.notFound().build();
     }
 }

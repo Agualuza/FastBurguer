@@ -1,7 +1,5 @@
 package com.br.fastBurguer.infra.controllers;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.fastBurguer.adapters.boundary.CreateOrderBoundary;
+import com.br.fastBurguer.adapters.boundary.FindAllOrdersBoundary;
+import com.br.fastBurguer.adapters.boundary.FindOrderBoundary;
+import com.br.fastBurguer.adapters.boundary.FindOrderByProductsBoundary;
 import com.br.fastBurguer.adapters.presenters.client.CreateClientRequest;
 import com.br.fastBurguer.adapters.presenters.order.CreateOrderRequest;
 import com.br.fastBurguer.adapters.presenters.order.FindAllOrdersResponse;
@@ -17,11 +19,6 @@ import com.br.fastBurguer.adapters.presenters.order.FindOrderByPaymentStatusResp
 import com.br.fastBurguer.adapters.presenters.order.FindOrderByProductsRequest;
 import com.br.fastBurguer.adapters.presenters.order.FindOrderByProductsResponse;
 import com.br.fastBurguer.adapters.presenters.order.OrderDTOMapper;
-import com.br.fastBurguer.application.useCases.CreateOrder;
-import com.br.fastBurguer.application.useCases.FindAllOrders;
-import com.br.fastBurguer.application.useCases.FindOrder;
-import com.br.fastBurguer.application.useCases.FindOrderByProducts;
-import com.br.fastBurguer.core.entities.Order;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,19 +32,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Orders", description = "Order create and search")
 public class OrderController {
 
-    private final CreateOrder createOrder;
-    private final FindAllOrders findAllOrders;
-    private final OrderDTOMapper orderDTOMapper;
-    private final FindOrder findOrderByPaymentStatus;
-    private final FindOrderByProducts findOrderByProducts;
+    private final CreateOrderBoundary createOrderBoundary;
+    private final FindAllOrdersBoundary findAllOrdersBoundary;
+    private final FindOrderBoundary findOrderBoundary;
+    private final FindOrderByProductsBoundary findOrderByProductsBoundary;
 
-    public OrderController(CreateOrder createOrder, OrderDTOMapper orderDTOMapper, FindAllOrders findAllOrders,
-            FindOrder findOrderByPaymentStatus, FindOrderByProducts findOrderByProducts) {
-        this.createOrder = createOrder;
-        this.orderDTOMapper = orderDTOMapper;
-        this.findAllOrders = findAllOrders;
-        this.findOrderByPaymentStatus = findOrderByPaymentStatus;
-        this.findOrderByProducts = findOrderByProducts;
+    public OrderController(CreateOrderBoundary createOrderBoundary, OrderDTOMapper orderDTOMapper, FindAllOrdersBoundary findAllOrdersBoundary,
+    FindOrderBoundary findOrderBoundary, FindOrderByProductsBoundary findOrderByProductsBoundary) {
+        this.createOrderBoundary = createOrderBoundary;
+        this.findAllOrdersBoundary = findAllOrdersBoundary;
+        this.findOrderBoundary = findOrderBoundary;
+        this.findOrderByProductsBoundary = findOrderByProductsBoundary;
     }
 
     @Operation(summary = "Create Order")
@@ -63,7 +58,7 @@ public class OrderController {
     public ResponseEntity<Void> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
 
         try {
-            createOrder.createOrder(createOrderRequest.clientId(), orderDTOMapper.toDomain(createOrderRequest));
+                createOrderBoundary.createOrder(createOrderRequest);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
@@ -81,10 +76,16 @@ public class OrderController {
     })
     @GetMapping()
     public ResponseEntity<FindAllOrdersResponse> listAllOrder() {
-        List<Order> orders = findAllOrders.findAllOrders();
-        FindAllOrdersResponse orderToReturn = orderDTOMapper.toListResponse(orders);
+        
+        try {
+                FindAllOrdersResponse orderToReturn = findAllOrdersBoundary.findAllOrders();
+                return ResponseEntity.ok(orderToReturn);
+                
+        } catch (Exception e) {
+                return ResponseEntity.internalServerError().build();
+        }
 
-        return ResponseEntity.ok(orderToReturn);
+        
     }
 
     @Operation(summary = "Find Order Status Payment")
@@ -98,8 +99,14 @@ public class OrderController {
     })
     @GetMapping("/paymentStatus")
     public ResponseEntity<FindOrderByPaymentStatusResponse> getOrderByStatus(@RequestParam("orderId") Long orderId) {
-        Order order = findOrderByPaymentStatus.findOrder(orderId);
-        return ResponseEntity.ok(orderDTOMapper.findOrderByPaymentStatusResponse(order));
+        
+        try {
+                FindOrderByPaymentStatusResponse orderToReturn = findOrderBoundary.findOrder(orderId);
+                return ResponseEntity.ok(orderToReturn);
+        } catch (Exception e) {
+                return ResponseEntity.internalServerError().build();
+        }
+         
     }
 
     @Operation(summary = "Find Order By Products List")
@@ -113,7 +120,13 @@ public class OrderController {
     })
     @GetMapping("/orderByProducts")
     public ResponseEntity<FindOrderByProductsResponse> getOrderByProducts(@RequestBody FindOrderByProductsRequest findOrderByProductsRequest) {
-        List<Order> orders = findOrderByProducts.findOrderByProducts(findOrderByProductsRequest.products());
-        return ResponseEntity.ok(orderDTOMapper.findOrderByProductsResponse(orders));
+        
+        try {
+                FindOrderByProductsResponse orders = findOrderByProductsBoundary.findOrderByProducts(findOrderByProductsRequest);
+                return ResponseEntity.ok(orders);
+        } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+        }
+        
     }
 }

@@ -42,7 +42,7 @@ Go to workspace root and run commands:
 
  **6.** Run the stressTest.sh to see infrastructure scaling
  ```bash
- .\stressTest.sh
+ .\stressTest\stressTest.sh
  ```
 
  **6.** Get Hpa Replicas

@@ -1,9 +1,9 @@
 package com.br.fastBurguer.infra.gateways.order;
 
 import com.br.fastBurguer.adapters.gateways.order.EditOrderPaymentStatusGateway;
-import com.br.fastBurguer.adapters.presenters.order.OrderEntityMapper;
 import com.br.fastBurguer.core.entities.Order;
 import com.br.fastBurguer.infra.persistence.order.OrderEntity;
+import com.br.fastBurguer.infra.persistence.order.OrderEntityMapper;
 import com.br.fastBurguer.infra.persistence.order.OrderRepository;
 
 public class EditOrderPaymentStatusRepositoryGateway implements EditOrderPaymentStatusGateway {

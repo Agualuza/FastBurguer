@@ -1,11 +1,13 @@
 package com.br.fastBurguer.application.useCases;
 
+import com.br.fastBurguer.adapters.boundary.CreateClientBoundary;
 import com.br.fastBurguer.adapters.gateways.client.CreateClientGateway;
+import com.br.fastBurguer.adapters.presenters.client.CreateClientRequest;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.core.entities.Cpf;
 import com.br.fastBurguer.core.entities.Email;
 
-public class CreateClient {
+public class CreateClient implements CreateClientBoundary {
 
     private final CreateClientGateway createClientGateway;
     private final CreateCpf createCpf;
@@ -17,14 +19,15 @@ public class CreateClient {
         this.createEmail = createEmail;
     }
 
-    public Client createClient(Client client) {
+    @Override
+    public void createClient(CreateClientRequest createClientRequest) {
 
-        Cpf cpf = createCpf.createCpf(client);
+        Cpf cpf = createCpf.createCpf(createClientRequest);
 
-        Email email = createEmail.createClientEmail(client);
+        Email email = createEmail.createClientEmail(createClientRequest);
 
-        Client clientToPersist = new Client(client.getName(), cpf, email, client.getIdentified());
+        Client clientToPersist = new Client(createClientRequest.name(), cpf, email, createClientRequest.identified().getValue());
 
-        return createClientGateway.createClient(clientToPersist);
+        createClientGateway.createClient(clientToPersist);
     }
 }

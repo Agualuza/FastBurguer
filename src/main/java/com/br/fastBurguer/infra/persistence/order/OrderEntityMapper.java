@@ -1,16 +1,15 @@
-package com.br.fastBurguer.adapters.presenters.order;
+package com.br.fastBurguer.infra.persistence.order;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.br.fastBurguer.core.entities.Order;
-import com.br.fastBurguer.infra.persistence.order.OrderEntity;
 
 public class OrderEntityMapper {
 
-    public OrderEntity toEntity(Long clientId, List<Long> products) {
-        return new OrderEntity(clientId, products);
+    public OrderEntity toEntity(Order order) {
+        return new OrderEntity(order.getClientId(), order.getProducts());
     }
 
     public OrderEntity toEntityEdit(Order order) {
@@ -18,7 +17,7 @@ public class OrderEntityMapper {
     }
 
     public OrderEntity toEntityEditPaymentStatus(Order order) {
-        return new OrderEntity(order.getId(), order.getClientId(), order.getProducts(), order.isPaymentApproved());
+        return new OrderEntity(order.getId(), order.getClientId(), order.getProducts(), order.isPaymentApproved(), order.getCreatedAt());
     }
 
     public Order toDomain(OrderEntity orderEntity) {

@@ -1,9 +1,9 @@
 package com.br.fastBurguer.infra.gateways.queue;
 
 import com.br.fastBurguer.adapters.gateways.queue.FindQueueByOrderIdGateway;
-import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.core.entities.Queue;
 import com.br.fastBurguer.infra.persistence.queue.QueueEntity;
+import com.br.fastBurguer.infra.persistence.queue.QueueEntityMapper;
 import com.br.fastBurguer.infra.persistence.queue.QueueRepository;
 
 public class FindQueueByOrderIdRepositoryGateway implements FindQueueByOrderIdGateway {

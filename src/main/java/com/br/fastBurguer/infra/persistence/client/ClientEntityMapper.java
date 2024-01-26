@@ -1,9 +1,8 @@
-package com.br.fastBurguer.adapters.presenters.client;
+package com.br.fastBurguer.infra.persistence.client;
 
-import com.br.fastBurguer.adapters.presenters.cpf.CpfEntityMapper;
-import com.br.fastBurguer.adapters.presenters.email.EmailEntityMapper;
 import com.br.fastBurguer.core.entities.Client;
-import com.br.fastBurguer.infra.persistence.client.ClientEntity;
+import com.br.fastBurguer.infra.persistence.cpf.CpfEntityMapper;
+import com.br.fastBurguer.infra.persistence.email.EmailEntityMapper;
 
 public class ClientEntityMapper {
 

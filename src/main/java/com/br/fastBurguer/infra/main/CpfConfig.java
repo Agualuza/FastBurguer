@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.br.fastBurguer.adapters.gateways.cpf.FindCpfGateway;
 import com.br.fastBurguer.adapters.gateways.cpf.ValidateCpfGateway;
-import com.br.fastBurguer.adapters.presenters.cpf.CpfEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateCpf;
 import com.br.fastBurguer.application.useCases.FindCpf;
 import com.br.fastBurguer.infra.gateways.cpf.SearchCpfRepositoryGateway;
+import com.br.fastBurguer.infra.persistence.cpf.CpfEntityMapper;
 import com.br.fastBurguer.infra.persistence.cpf.CpfRepository;
 import com.br.fastBurguer.services.ValidateCpf;
 

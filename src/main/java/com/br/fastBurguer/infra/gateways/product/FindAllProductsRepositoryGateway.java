@@ -3,9 +3,9 @@ package com.br.fastBurguer.infra.gateways.product;
 import java.util.List;
 
 import com.br.fastBurguer.adapters.gateways.product.FindAllProductsGateway;
-import com.br.fastBurguer.adapters.presenters.product.ProductEntityMapper;
 import com.br.fastBurguer.core.entities.Product;
 import com.br.fastBurguer.infra.persistence.products.ProductEntity;
+import com.br.fastBurguer.infra.persistence.products.ProductEntityMapper;
 import com.br.fastBurguer.infra.persistence.products.ProdutcRepository;
 
 public class FindAllProductsRepositoryGateway implements FindAllProductsGateway {

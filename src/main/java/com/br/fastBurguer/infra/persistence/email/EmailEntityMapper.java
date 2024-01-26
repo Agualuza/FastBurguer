@@ -1,7 +1,6 @@
-package com.br.fastBurguer.adapters.presenters.email;
+package com.br.fastBurguer.infra.persistence.email;
 
 import com.br.fastBurguer.core.entities.Email;
-import com.br.fastBurguer.infra.persistence.email.EmailEntity;
 
 public class EmailEntityMapper {
 

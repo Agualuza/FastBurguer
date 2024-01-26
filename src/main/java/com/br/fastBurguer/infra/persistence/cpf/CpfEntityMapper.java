@@ -1,9 +1,8 @@
-package com.br.fastBurguer.adapters.presenters.cpf;
+package com.br.fastBurguer.infra.persistence.cpf;
 
 import java.util.Optional;
 
 import com.br.fastBurguer.core.entities.Cpf;
-import com.br.fastBurguer.infra.persistence.cpf.CpfEntity;
 
 public class CpfEntityMapper {
 

@@ -1,11 +1,10 @@
-package com.br.fastBurguer.adapters.presenters.product;
+package com.br.fastBurguer.infra.persistence.products;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.br.fastBurguer.core.entities.Product;
-import com.br.fastBurguer.infra.persistence.products.ProductEntity;
 
 public class ProductEntityMapper {
 

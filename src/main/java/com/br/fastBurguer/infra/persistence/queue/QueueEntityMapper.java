@@ -1,4 +1,4 @@
-package com.br.fastBurguer.adapters.presenters.queue;
+package com.br.fastBurguer.infra.persistence.queue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import com.br.fastBurguer.core.Enums.QueueStatusEnum;
 import com.br.fastBurguer.core.entities.Queue;
-import com.br.fastBurguer.infra.persistence.queue.QueueEntity;
 
 public class QueueEntityMapper {
 

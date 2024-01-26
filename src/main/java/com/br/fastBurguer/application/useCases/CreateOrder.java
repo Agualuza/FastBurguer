@@ -1,12 +1,12 @@
 package com.br.fastBurguer.application.useCases;
 
-import java.util.List;
-
+import com.br.fastBurguer.adapters.boundary.CreateOrderBoundary;
 import com.br.fastBurguer.adapters.gateways.order.CreateOrderGateway;
+import com.br.fastBurguer.adapters.presenters.order.CreateOrderRequest;
 import com.br.fastBurguer.core.entities.Client;
 import com.br.fastBurguer.core.entities.Order;
 
-public class CreateOrder {
+public class CreateOrder implements CreateOrderBoundary {
 
     private final CreateOrderGateway createOrderGateway;
     private final FindClientById findClientById;
@@ -18,18 +18,19 @@ public class CreateOrder {
         this.createQueue = createQueue;
     }
 
-    public Order createOrder(Long clientId, List<Long> products) {
+    @Override
+    public void createOrder(CreateOrderRequest createOrderRequest) {
 
-        Client clientFound = findClientById.findClientById(clientId);
+        Client clientFound = findClientById.findClientById(createOrderRequest.clientId());
 
         if (clientFound == null) {
             throw new Error("Usuário não existe");
         }
 
-        Order orderCreated = createOrderGateway.createOrder(clientFound.getId(), products);
+        Order orderToCreate = new Order(clientFound.getId(), createOrderRequest.products());
+
+        Order orderCreated = createOrderGateway.createOrder(orderToCreate);
 
         createQueue.createQueue(orderCreated.getId());
-
-        return orderCreated;
     }
 }

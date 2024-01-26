@@ -10,7 +10,6 @@ import com.br.fastBurguer.adapters.gateways.order.FindOrderByProductsGateway;
 import com.br.fastBurguer.adapters.gateways.order.FindOrderGateway;
 import com.br.fastBurguer.adapters.gateways.product.FindProductByIdGateway;
 import com.br.fastBurguer.adapters.presenters.order.OrderDTOMapper;
-import com.br.fastBurguer.adapters.presenters.order.OrderEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateOrder;
 import com.br.fastBurguer.application.useCases.CreateQueue;
 import com.br.fastBurguer.application.useCases.EditOrderPaymentStatus;
@@ -24,6 +23,7 @@ import com.br.fastBurguer.infra.gateways.order.EditOrderPaymentStatusRepositoryG
 import com.br.fastBurguer.infra.gateways.order.FindAllOrdersRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindOrderByPaymentStatusRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.order.FindOrderByProductsRepositoryGateway;
+import com.br.fastBurguer.infra.persistence.order.OrderEntityMapper;
 import com.br.fastBurguer.infra.persistence.order.OrderRepository;
 
 @Configuration
@@ -36,24 +36,24 @@ public class OrderConfig {
     }
 
     @Bean
-    FindAllOrders findAllOrders(FindAllOrdersGateway findAllOrdersGateway) {
-        return new FindAllOrders(findAllOrdersGateway);
+    FindAllOrders findAllOrders(FindAllOrdersGateway findAllOrdersGateway, OrderDTOMapper orderDTOMapper) {
+        return new FindAllOrders(findAllOrdersGateway, orderDTOMapper);
     }
 
     @Bean
-    FindOrder findOrderByPaymentStatus(FindOrderGateway findOrderByPaymentStatusGateway) {
-        return new FindOrder(findOrderByPaymentStatusGateway);
+    FindOrder findOrderByPaymentStatus(FindOrderGateway findOrderGateway, OrderDTOMapper orderDTOMapper) {
+        return new FindOrder(findOrderGateway, orderDTOMapper);
     }
 
     @Bean
     EditOrderPaymentStatus editOrderPaymentStatus(EditOrderPaymentStatusGateway editOrderPaymentStatusGateway,
-            FindOrder findOrder) {
-        return new EditOrderPaymentStatus(editOrderPaymentStatusGateway, findOrder);
+    FindOrderGateway findOrderGateway) {
+        return new EditOrderPaymentStatus(editOrderPaymentStatusGateway, findOrderGateway);
     }
 
     @Bean
-    FindOrderByProducts findOrderByProducts(FindOrderByProductsGateway findOrderByProductsGateway) {
-        return new FindOrderByProducts(findOrderByProductsGateway);
+    FindOrderByProducts findOrderByProducts(FindOrderByProductsGateway findOrderByProductsGateway, OrderDTOMapper orderDTOMapper) {
+        return new FindOrderByProducts(findOrderByProductsGateway, orderDTOMapper);
     }
 
     @Bean

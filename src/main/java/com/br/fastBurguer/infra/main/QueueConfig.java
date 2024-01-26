@@ -8,7 +8,6 @@ import com.br.fastBurguer.adapters.gateways.queue.EditQueueStatusGateway;
 import com.br.fastBurguer.adapters.gateways.queue.FindQueueByOrderIdGateway;
 import com.br.fastBurguer.adapters.gateways.queue.FindQueueByStatusGateway;
 import com.br.fastBurguer.adapters.presenters.queue.QueueDTOMapper;
-import com.br.fastBurguer.adapters.presenters.queue.QueueEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateQueue;
 import com.br.fastBurguer.application.useCases.EditQueueStatus;
 import com.br.fastBurguer.application.useCases.FindQueueByOrderId;
@@ -17,6 +16,7 @@ import com.br.fastBurguer.infra.gateways.queue.CreateQueueRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.EditQueueStatusRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.FindQueueByOrderIdRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.queue.FindQueueByStatusRepository;
+import com.br.fastBurguer.infra.persistence.queue.QueueEntityMapper;
 import com.br.fastBurguer.infra.persistence.queue.QueueRepository;
 
 @Configuration
@@ -28,8 +28,8 @@ public class QueueConfig {
     }
 
     @Bean
-    EditQueueStatus editQueueStatus(EditQueueStatusGateway editQueueStatusGateway) {
-        return new EditQueueStatus(editQueueStatusGateway);
+    EditQueueStatus editQueueStatus(EditQueueStatusGateway editQueueStatusGateway, QueueDTOMapper queueDTOMapper) {
+        return new EditQueueStatus(editQueueStatusGateway, queueDTOMapper);
     }
 
     @Bean

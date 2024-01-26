@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fastBurguer.adapters.gateways.email.ValidateEmailGateway;
-import com.br.fastBurguer.adapters.presenters.email.EmailEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateEmail;
+import com.br.fastBurguer.infra.persistence.email.EmailEntityMapper;
 import com.br.fastBurguer.services.ValidateEmailAddress;
 
 @Configuration

@@ -10,7 +10,6 @@ import com.br.fastBurguer.adapters.gateways.product.FindAllProductsGateway;
 import com.br.fastBurguer.adapters.gateways.product.FindProductByCategoryGateway;
 import com.br.fastBurguer.adapters.gateways.product.FindProductByIdGateway;
 import com.br.fastBurguer.adapters.presenters.product.ProductDTOMapper;
-import com.br.fastBurguer.adapters.presenters.product.ProductEntityMapper;
 import com.br.fastBurguer.application.useCases.CreateProduct;
 import com.br.fastBurguer.application.useCases.DeleteProduct;
 import com.br.fastBurguer.application.useCases.EditProduct;
@@ -23,19 +22,20 @@ import com.br.fastBurguer.infra.gateways.product.EditProductRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.product.FindAllProductsRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.product.FindProductByCategoryRepositoryGateway;
 import com.br.fastBurguer.infra.gateways.product.FindProductByIdRepositoryGateway;
+import com.br.fastBurguer.infra.persistence.products.ProductEntityMapper;
 import com.br.fastBurguer.infra.persistence.products.ProdutcRepository;
 
 @Configuration
 public class ProductConfig {
 
     @Bean
-    CreateProduct createProduct(CreateProductGateway createProductGateway) {
-        return new CreateProduct(createProductGateway);
+    CreateProduct createProduct(CreateProductGateway createProductGateway, ProductDTOMapper productDTOMapper) {
+        return new CreateProduct(createProductGateway, productDTOMapper);
     }
 
     @Bean
-    EditProduct editProduct(EditProductGateway editProductGateway) {
-        return new EditProduct(editProductGateway);
+    EditProduct editProduct(EditProductGateway editProductGateway, ProductDTOMapper productDTOMapper) {
+        return new EditProduct(editProductGateway, productDTOMapper);
     }
 
     @Bean
@@ -44,8 +44,8 @@ public class ProductConfig {
     }
 
     @Bean
-    FindProductByCategory findProductByCategory(FindProductByCategoryGateway findProductByCategoryGateway) {
-        return new FindProductByCategory(findProductByCategoryGateway);
+    FindProductByCategory findProductByCategory(FindProductByCategoryGateway findProductByCategoryGateway, ProductDTOMapper productDTOMapper) {
+        return new FindProductByCategory(findProductByCategoryGateway, productDTOMapper);
     }
 
     @Bean
@@ -54,8 +54,8 @@ public class ProductConfig {
     }
 
     @Bean
-    FindAllProducts findAllProducts(FindAllProductsGateway findAllProductsGateway) {
-        return new FindAllProducts(findAllProductsGateway);
+    FindAllProducts findAllProducts(FindAllProductsGateway findAllProductsGateway, ProductDTOMapper productDTOMapper) {
+        return new FindAllProducts(findAllProductsGateway, productDTOMapper);
     }
 
     @Bean

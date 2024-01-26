@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Target URL to stress test
-target_url="http://127.0.0.1:64403/products"
+target_url="http://127.0.0.1:51380/products"
 
 # Number of requests to make
 total_requests=10000
