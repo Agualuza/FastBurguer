@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"Guilherme\",\r\n\t\"cpf\": {\r\n\t\t\"number\": \"123.123.123-54\"\r\n\t},\r\n\t\"email\": {\r\n\t\t\"address\": \"teste@teste.com.br\"\r\n\t},\r\n\t\"identified\": \"CPF\"\r\n}",
+							"raw": "{\r\n\t\"name\": \"Amanda\",\r\n\t\"cpfNumber\": \"12312312379\",\r\n\t\"emailAddress\": \"teste@teste.com.br\",\r\n\t\"identified\": \"CPF\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -33,7 +33,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{fastburguer}}/client?cpf=12312312354",
+							"raw": "{{fastburguer}}/client?cpf=12312312379",
 							"host": [
 								"{{fastburguer}}"
 							],
@@ -43,7 +43,7 @@
 							"query": [
 								{
 									"key": "cpf",
-									"value": "12312312354"
+									"value": "12312312379"
 								}
 							]
 						}
@@ -62,7 +62,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"X-Burguer\",\r\n\t\"description\": \"com queijo\",\r\n\t\"price\": 9.99,\r\n\t\"type\": \"SANDWICH\"\r\n}",
+							"raw": "{\r\n\t\"name\": \"X-Tudo\",\r\n\t\"description\": \"com queijo\",\r\n\t\"price\": 19.99,\r\n\t\"type\": \"SANDWICH\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,7 +80,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"id\": 2,\r\n\t\"name\": \"coca\",\r\n\t\"description\": \"bebida gaseificada do registro 2\",\r\n\t\"price\": 11.88,\r\n\t\"type\": \"bebida\"\r\n}",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"X-Tudo\",\r\n    \"description\": \"com queijo\",\r\n    \"price\": 29.99,\r\n    \"type\": \"SANDWICH\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,7 +121,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{fastburguer}}/products?id=4",
+							"raw": "{{fastburguer}}/products?id=2",
 							"host": [
 								"{{fastburguer}}"
 							],
@@ -131,7 +131,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "4"
+									"value": "2"
 								}
 							]
 						}
@@ -159,7 +159,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"clientId\": 1,\r\n\t\"products\": [1]\r\n}",
+							"raw": "{\r\n\t\"clientId\": 1,\r\n\t\"products\": [1,4]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,7 +185,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{fastburguer}}/order/paymentStatus?orderId=1",
+							"raw": "{{fastburguer}}/order/paymentStatus?orderId=6",
 							"host": [
 								"{{fastburguer}}"
 							],
@@ -196,7 +196,7 @@
 							"query": [
 								{
 									"key": "orderId",
-									"value": "1"
+									"value": "6"
 								}
 							]
 						}
@@ -213,7 +213,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"products\": [1,2]\r\n}",
+							"raw": "{\r\n    \"products\": [1,4]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -235,7 +235,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{fastburguer}}/queue?status=DONE",
+							"raw": "{{fastburguer}}/queue?status=DOING",
 							"host": [
 								"{{fastburguer}}"
 							],
@@ -245,7 +245,7 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "DONE"
+									"value": "DOING"
 								}
 							]
 						}
@@ -259,7 +259,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"orderId\": 4\r\n}",
+							"raw": "{\r\n\t\"orderId\": 6\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,7 +282,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"orderId\": 1,\r\n\t\"paymentStatus\": true\r\n}",
+							"raw": "{\r\n\t\"orderId\": 6,\r\n\t\"paymentStatus\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
