@@ -49,3 +49,11 @@ Go to workspace root and run commands:
  ```bash
 kubectl get hpa --watch
  ```
+
+## Video
+https://vimeo.com/907283881?share=copy
+
+## Kubernetes Architecture
+![image](https://github.com/Gui182/FastBurguer/assets/25313322/3a48754f-9fce-415a-93b7-82950e67d5ed)
+
+
